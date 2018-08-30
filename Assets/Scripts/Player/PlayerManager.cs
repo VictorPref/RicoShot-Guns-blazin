@@ -5,9 +5,26 @@ using UnityEngine;
 public class PlayerManager
 {
     readonly int INPUTCHECKDELAY = 2;
-
-    List<Player> players;
+    BoxCollider2D bg;
+    private List<Player> players;
     string[] connectedControllers;
+
+    #region Singleton
+    private PlayerManager()
+    {
+    }
+
+    public static PlayerManager Instance { get { return Nested.instance; } }
+
+    private class Nested
+    {
+        static Nested()
+        {
+        }
+
+        internal static readonly PlayerManager instance = new PlayerManager();
+    }
+    #endregion
 
     public void Initialize()
     {
@@ -16,12 +33,12 @@ public class PlayerManager
 
         players = new List<Player>();
         CreatePlayers();
-
+        
     }
 
     public void Update()
     {
-      
+
         if (players != null)
         {
             foreach (Player p in players)
@@ -34,11 +51,11 @@ public class PlayerManager
         }
     }
 
-    void CreatePlayers()
-    {      
+    private void CreatePlayers()
+    {
         if (connectedControllers.Length > 0)
         {
-           
+
             for (int i = 0; i < connectedControllers.Length; i++)
             {
                 if (!string.IsNullOrEmpty(connectedControllers[i]))
@@ -57,11 +74,18 @@ public class PlayerManager
 
     void RemovePlayer()
     {
-        for (int i = 0; i < connectedControllers.Length - 1; i++) {
-            if (string.IsNullOrEmpty(connectedControllers[i])) {
+        for (int i = 0; i < connectedControllers.Length - 1; i++)
+        {
+            if (string.IsNullOrEmpty(connectedControllers[i]))
+            {
                 players[i] = null;
             }
         }
+    }
+
+    public List<Player> GetPlayers()
+    {
+        return players;
     }
 
     IEnumerator UpdateConnectedControllers()
