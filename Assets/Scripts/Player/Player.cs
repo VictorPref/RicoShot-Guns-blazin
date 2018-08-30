@@ -5,18 +5,24 @@ using UnityEngine;
 enum PlayerColor { BLUE, RED, GREEN, YELLOW };
 public class Player : MonoBehaviour {
 
+    public GameObject gun;
+
     InputManager inputManager;
     int playerId;
     float timeShoot;
-    float timeBetweenShot = 0.3f;
-    bool isTriggerDown = false;
     float rotationSpeed = -50;
+    BulletManager bulletManager;
+    readonly int CHARGE_MAX = 6;
+    readonly int CHARGE_MIN = 0;
+    int chargeur;
 
     public void setPlayerId(int playerId)
     {
         this.playerId = playerId;
         inputManager = new InputManager();
         timeShoot = Time.time;
+        bulletManager = BulletManager.Instance;
+        chargeur = CHARGE_MAX;
     }
 
 
@@ -49,6 +55,9 @@ public class Player : MonoBehaviour {
 
         //Player Shoot and send rt input information
         Shoot(inputPkg.rt);
+
+        //Player can Reload
+        Reload(inputPkg.X);
     }
 
 
@@ -63,11 +72,17 @@ public class Player : MonoBehaviour {
     {
 
         //Can shoot if the input is true
-        if (shoot )
+        if (shoot && chargeur > CHARGE_MIN)
         {
-            Debug.Log("SHOOT: "+playerId);      
+            bulletManager.CreateBullet(gun.transform.position+gun.transform.right ,new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.z),playerId);
+            chargeur--;  
         }
         
+    }
+    void Reload(bool reload)
+    {
+        if (reload)
+            chargeur = CHARGE_MAX;
     }
 
     public void PlayerFixedUpdate()

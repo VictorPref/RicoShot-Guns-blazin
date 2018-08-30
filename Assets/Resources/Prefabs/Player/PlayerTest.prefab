@@ -38,9 +38,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4657141686597418}
   - component: {fileID: 33001997147236814}
-  - component: {fileID: 135951943469350596}
   - component: {fileID: 23466649403947998}
   - component: {fileID: 114213874266149470}
+  - component: {fileID: 60899295892215146}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Untagged
@@ -69,8 +69,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214883109467472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 0.28, z: 0}
-  m_LocalScale: {x: 0.20000002, y: 1, z: 1}
+  m_LocalPosition: {x: 0.31, y: 0.59, z: 0}
+  m_LocalScale: {x: 0.9125001, y: 0.20000015, z: 1}
   m_Children: []
   m_Father: {fileID: 4657141686597418}
   m_RootOrder: 0
@@ -157,6 +157,35 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214883109467472}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!60 &60899295892215146
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1649534923457834}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.5}
+      - {x: -0.47552827, y: 0.15450849}
+      - {x: -0.2938926, y: -0.40450853}
+      - {x: 0.29389268, y: -0.40450847}
+      - {x: 0.47552824, y: 0.15450856}
 --- !u!65 &65464583101084310
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -180,15 +209,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b96db55e908a654bb6cf78ebbab0642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135951943469350596
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1649534923457834}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  gun: {fileID: 1214883109467472}

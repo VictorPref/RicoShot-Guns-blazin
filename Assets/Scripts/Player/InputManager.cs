@@ -48,7 +48,6 @@ public class InputManager : MonoBehaviour {
         toRet.id = id;
 
         //return package
-        Debug.Log(toRet.ToString());
 
         return toRet;
     }
