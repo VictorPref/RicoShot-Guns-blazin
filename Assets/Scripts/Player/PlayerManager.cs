@@ -21,6 +21,7 @@ public class PlayerManager
 
     public void Update()
     {
+      
         if (players != null)
         {
             foreach (Player p in players)

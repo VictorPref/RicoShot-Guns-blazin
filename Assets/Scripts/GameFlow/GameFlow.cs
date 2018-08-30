@@ -13,5 +13,17 @@ public class GameFlow : Flow {
         playerManager.Initialize();
 
     }
+    public override void Update(float dt)
+    {
+        base.Update(dt);
+        playerManager.Update();
+    }
+
+    public override void FixedUpdate(float dt)
+    {
+        base.FixedUpdate(dt);
+
+
+    }
 
 }
