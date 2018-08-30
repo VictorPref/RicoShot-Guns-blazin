@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+enum PlayerColor { BLUE, RED, GREEN, YELLOW };
 public class Player : MonoBehaviour {
 
     InputManager inputManager;
-    Phase1Manager phase1Manager;
+    int playerId;
 
+    public void setPlayerId(int playerId)
+    {
+        this.playerId = playerId;
+
+    }
    
     public void PlayerCreated()
     {
         inputManager = new InputManager();
-        phase1Manager.Initialize();
-
 
     }
 
@@ -22,6 +26,10 @@ public class Player : MonoBehaviour {
         RotatePlayer(inputPkg.dirPressed);
         
     }
+
+    public void UpdatePhase1(InputManager.InputPkg inputPkg) { }
+
+    public void UpdatePhase2(InputManager.InputPkg inputPkg) { }
 
 
     public void RotatePlayer(Vector2 dir)
@@ -42,22 +50,5 @@ public class Player : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update () {
-
-
-        //Rotation systeme with Keyboard
-        if (Input.GetKey(KeyCode.A))
-        {
-            gameObject.transform.Rotate(new Vector3(0, 0, 2));
-            phase1Manager.Update();
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            gameObject.transform.Rotate(new Vector3(0, 0, -2));
-        }
-
-
-
-    }
+ 
 }
