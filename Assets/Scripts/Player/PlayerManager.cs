@@ -34,8 +34,7 @@ public class PlayerManager
     }
 
     void CreatePlayers()
-    {
-        
+    {      
         if (connectedControllers.Length > 0)
         {
            
@@ -64,11 +63,12 @@ public class PlayerManager
         }
     }
 
-    //IEnumerator UpdateConnectedControllers() {
-
-
-    //    yield return WaitForSeconds(INPUTCHECKDELAY);
-    //}
+    IEnumerator UpdateConnectedControllers()
+    {
+        //check for controllers plugged in/out
+        //update player list accordingly
+        yield return new WaitForSeconds(INPUTCHECKDELAY);
+    }
 
     public void DeleteManager()
     {
