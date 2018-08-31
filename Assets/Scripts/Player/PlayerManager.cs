@@ -6,22 +6,25 @@ public class PlayerManager
 {
     readonly int INPUTCHECKDELAY = 2;
     private List<Player> players;
+    private List<Vector2> playersPositions = null;
     string[] connectedControllers;
+    private static PlayerManager instance = null;
 
     #region Singleton
     private PlayerManager()
     {
     }
 
-    public static PlayerManager Instance { get { return Nested.instance; } }
-
-    private class Nested
+    public static PlayerManager Instance
     {
-        static Nested()
+        get
         {
+            if (instance == null)
+            {
+                instance = new PlayerManager();
+            }
+            return instance;
         }
-
-        internal static readonly PlayerManager instance = new PlayerManager();
     }
     #endregion
 
@@ -29,10 +32,20 @@ public class PlayerManager
     {
         connectedControllers = Input.GetJoystickNames();
         Debug.Log("Joystick names :" + connectedControllers[0]);
-
         players = new List<Player>();
         CreatePlayers();
-        
+        InitializePlayersPositions();
+    }
+
+    public void InitializePlayersPositions()
+    {
+        playersPositions = LevelManager.Instance.RetrievePlayersPositions();
+        int i = 0;
+        foreach (Player p in players)
+        {
+            p.transform.position = playersPositions[i];
+            i++;
+        }
     }
 
     public void Update()
@@ -54,7 +67,6 @@ public class PlayerManager
     {
         if (connectedControllers.Length > 0)
         {
-
             for (int i = 0; i < connectedControllers.Length; i++)
             {
                 if (!string.IsNullOrEmpty(connectedControllers[i]))
@@ -62,13 +74,13 @@ public class PlayerManager
                     GameObject playerObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Player/PlayerTest")); //Create an instance of the player
                     playerObject.transform.position = new Vector2();
                     Player newPlayer = playerObject.GetComponent<Player>();
-                    newPlayer.setPlayerId(i + 1);
+                    newPlayer.setPlayerId(i + 1); //+1 because id should not be 0
                     players.Add(newPlayer);
-                    Debug.Log("Player created");
                 }
             }
 
         }
+
     }
 
     void RemovePlayer()

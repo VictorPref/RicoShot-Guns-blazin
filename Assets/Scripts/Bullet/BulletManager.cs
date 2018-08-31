@@ -5,44 +5,37 @@ using UnityEngine;
 public sealed class BulletManager
 {
     private static BulletManager instance = null;
-    private static readonly object padlock = new object();
 
-     List<Bullet> bullets = new List<Bullet>();
+    List<Bullet> bullets = new List<Bullet>();
     int nbBaseLayer = 7;
-
-   
-
 
     public static BulletManager Instance
     {
         get
         {
-            lock (padlock)
+            if (instance == null)
             {
-                if (instance == null)
-                {
-                    instance = new BulletManager();
-                   
-                }
-                return instance;
+                instance = new BulletManager();
+
             }
+            return instance;
         }
     }
 
     public void initialization()
     {
-     
+
     }
 
     public void Update()
     {
-     
+
         if (bullets != null)
         {
-           
+
             foreach (Bullet bullet in bullets)
             {
-               
+
                 if (bullet != null)
                 {
                     bullet.UpdateBullet();
@@ -51,7 +44,7 @@ public sealed class BulletManager
         }
     }
 
-    public void CreateBullet(Vector2 SpawnLocation,Vector2 rotation,int id)
+    public void CreateBullet(Vector2 SpawnLocation, Vector2 rotation, int id)
     {
 
         GameObject bulletObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Bullet/Bullet")); //Create Bullet
@@ -67,8 +60,8 @@ public sealed class BulletManager
 
         Bullet b = bulletObject.GetComponent<Bullet>();
         b.initialization();
-      
-       bullets.Add(b);
+
+        bullets.Add(b);
 
 
     }

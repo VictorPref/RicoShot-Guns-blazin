@@ -12,12 +12,12 @@ public class GameFlow : Flow {
 
     public override void InitializeFlow()
     {
-        base.InitializeFlow();
-        playerManager = PlayerManager.Instance;
-        playerManager.Initialize();
+        base.InitializeFlow();     
         bulletManager = BulletManager.Instance;
         levelManager = LevelManager.Instance;
-        levelManager.GenerateLevel(CURRENTLEVELTESTED);
+        playerManager = PlayerManager.Instance;
+        levelManager.GenerateLevel(CURRENTLEVELTESTED);       
+        playerManager.Initialize();
         Debug.Log("init GameFlow");
     }
     public override void Update(float dt)

@@ -45,8 +45,8 @@ public class LevelManager {
         int i = 1;
         List<Vector2> resultList = new List<Vector2>();
 
-        while (i < playerCount) {
-            resultList.Add(GameObject.FindGameObjectWithTag("P" + i + "Position").transform.position);
+        while (i <= playerCount) {
+            resultList.Add(GameObject.FindGameObjectWithTag("Player" + i).transform.position);
             i++;
         }
 
