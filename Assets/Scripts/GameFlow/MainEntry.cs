@@ -11,7 +11,6 @@ public class MainEntry : MonoBehaviour {
     private void Awake()
     {
         flowManager = new FlowManager();
-        
     }
 
     // Use this for initialization

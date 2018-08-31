@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 enum PlayerColor { BLUE, RED, GREEN, YELLOW };
+enum ObstacleType { ObsMSmall1, ObsMSmall2, ObsWSmall1, ObsWSmall2 };
+
 public class Player : MonoBehaviour {
 
     public GameObject gun;
-
     InputManager inputManager;
     int playerId;
     float timeShoot;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour {
     readonly int CHARGE_MAX = 6;
     readonly int CHARGE_MIN = 0;
     int chargeur;
+    int currentObstacle = 0;
 
     public void setPlayerId(int playerId)
     {
@@ -45,7 +47,10 @@ public class Player : MonoBehaviour {
         
     }
 
-     void UpdatePhase1(InputManager.InputPkg inputPkg) { }
+     void UpdatePhase1(InputManager.InputPkg inputPkg) {
+
+
+    }
 
      void UpdatePhase2(InputManager.InputPkg inputPkg) {
 
@@ -83,6 +88,10 @@ public class Player : MonoBehaviour {
     {
         if (reload)
             chargeur = CHARGE_MAX;
+    }
+
+    void CycleObstacles() {
+
     }
 
     public void PlayerFixedUpdate()

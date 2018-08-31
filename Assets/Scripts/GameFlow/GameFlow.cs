@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class GameFlow : Flow {
 
+    public readonly int CURRENTLEVELTESTED = 1;
+
     PlayerManager playerManager;
     BulletManager bulletManager;
+    LevelManager levelManager;
 
     public override void InitializeFlow()
     {
         base.InitializeFlow();
-        playerManager = new PlayerManager();
+        playerManager = PlayerManager.Instance;
         playerManager.Initialize();
         bulletManager = BulletManager.Instance;
-
+        levelManager = LevelManager.Instance;
+        levelManager.GenerateLevel(CURRENTLEVELTESTED);
+        Debug.Log("init GameFlow");
     }
     public override void Update(float dt)
     {

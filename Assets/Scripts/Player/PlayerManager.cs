@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerManager
 {
     readonly int INPUTCHECKDELAY = 2;
-    BoxCollider2D bg;
     private List<Player> players;
     string[] connectedControllers;
 
