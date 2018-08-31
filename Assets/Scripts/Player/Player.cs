@@ -7,14 +7,15 @@ enum ObstacleType { ObsMSmall1, ObsMSmall2, ObsWSmall1, ObsWSmall2 };
 
 public class Player : MonoBehaviour {
 
+    readonly int CHARGE_MAX = 6;
+    readonly int CHARGE_MIN = 0;
+
     public GameObject gun;
     InputManager inputManager;
     int playerId;
     float timeShoot;
     float rotationSpeed = -50;
-    BulletManager bulletManager;
-    readonly int CHARGE_MAX = 6;
-    readonly int CHARGE_MIN = 0;
+
     int chargeur;
     int currentObstacle = 0;
 
@@ -23,7 +24,6 @@ public class Player : MonoBehaviour {
         this.playerId = playerId;
         inputManager = new InputManager();
         timeShoot = Time.time;
-        bulletManager = BulletManager.Instance;
         chargeur = CHARGE_MAX;
     }
 
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour {
         //Can shoot if the input is true
         if (shoot && chargeur > CHARGE_MIN)
         {
-            bulletManager.CreateBullet(gun.transform.position+gun.transform.right ,new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.z),playerId);
+            BulletManager.Instance.CreateBullet(gun.transform.position+gun.transform.right ,new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.z),playerId);
             chargeur--;  
         }
         

@@ -40,7 +40,7 @@ public class LevelManager {
        
     }
 
-    public List<Vector2> RetrievePlayersPositions() {
+    public List<Vector2> RetrievePlayersSpawnPositions() {
         int playerCount = PlayerManager.Instance.GetPlayers().Count;
         int i = 1;
         List<Vector2> resultList = new List<Vector2>();

@@ -39,7 +39,7 @@ public class PlayerManager
 
     public void InitializePlayersPositions()
     {
-        playersPositions = LevelManager.Instance.RetrievePlayersPositions();
+        playersPositions = LevelManager.Instance.RetrievePlayersSpawnPositions();
         int i = 0;
         foreach (Player p in players)
         {

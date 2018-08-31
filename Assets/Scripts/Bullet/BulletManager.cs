@@ -47,10 +47,10 @@ public sealed class BulletManager
     public void CreateBullet(Vector2 SpawnLocation, Vector2 rotation, int id)
     {
 
-        GameObject bulletObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Bullet/Bullet")); //Create Bullet
+        GameObject bulletObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Bullet/Sphere")); //Create Bullet
         if (!bulletObject)
         {
-            Debug.LogError("Didn't find enemy resources at Prefabs/Bullet/Bullet");
+            Debug.LogError("Didn't find enemy resources at Prefabs/Bullet/Sphere");
             return;
         }
         bulletObject.transform.position = SpawnLocation;
