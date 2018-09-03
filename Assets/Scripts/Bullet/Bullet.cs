@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    int nb_rebond = 5;
+    int maxRicochets = 5;
     Rigidbody2D rb;
     CircleCollider2D collider;
     Vector3 currDir;
     Vector2 destination;
-    float vitesse = 15;
+    float initialSpeed = 15, minSpeed = 3;
 
-    float angle, rayLength = 1.5f, bounciness = 0.5f;
+    float angle, rayLength = 1.5f, bounciness = 0.75f;
 
     public void initialization()
     {
         gameObject.GetComponent<Renderer>().material.color = Color.white;
         collider = gameObject.GetComponent<CircleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.right * vitesse;
+        rb.velocity = transform.right * initialSpeed;
     }
     public void UpdateBullet()
     {
@@ -32,6 +32,7 @@ public class Bullet : MonoBehaviour
 
             if (collider.IsTouching(hits[i].collider)) 
             {
+                maxRicochets--;
                 angle = Vector2.Angle(transform.right, Vector2.Reflect(transform.right, hits[i].normal)); //retrieving angle formed by incoming direction and its reflection
 
                 //this check and the three next are to make sure the rotation angle goes clockwise if needed
@@ -51,10 +52,19 @@ public class Bullet : MonoBehaviour
                     angle *= -1;
                 }
                 //applying new velocity following the reflected direction
-                rb.velocity = Vector2.Reflect(transform.right, hits[i].normal) * vitesse * bounciness;
+                initialSpeed *= bounciness;
+                rb.velocity = Vector2.Reflect(transform.right, hits[i].normal) * initialSpeed;
                 //rotating the sprite's transform
                 transform.Rotate(new Vector3(0, 0, 1), angle);
             }
         }
+
+        if (isBulletDead()) {
+            Destroy(gameObject);
+        }
+    }
+
+    public bool isBulletDead() {
+        return maxRicochets == 0 || rb.velocity.magnitude <= minSpeed ? true : false;
     }
 }
