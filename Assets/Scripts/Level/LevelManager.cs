@@ -23,8 +23,7 @@ public class LevelManager {
     }
     #endregion
 
-    public void GenerateLevel(int lvlNumber) {
-        Debug.Log("in generateLevel()");
+    public void GenerateLevel(int lvlNumber) { 
         GameObject levelObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Levels/Level" + lvlNumber)); //Create level
         if (!levelObject)
         {

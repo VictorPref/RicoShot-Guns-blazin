@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
+  - Player2
+  - Player1
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - P3Object
   - P4Object
   - 
-  - 
+  - NeutralObstacle
   - 
   - 
   - 

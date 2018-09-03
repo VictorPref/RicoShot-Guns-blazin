@@ -10,7 +10,6 @@ public class InputManager : MonoBehaviour {
         //Create package
         InputPkg toRet = new InputPkg();
         
-
         //Get input
         float left_horizontal = Input.GetAxis("P"+id+"_Horizontal");
         float left_vertical= Input.GetAxis("P" + id + "_Vertical");

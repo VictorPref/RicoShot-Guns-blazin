@@ -31,7 +31,6 @@ public class PlayerManager
     public void Initialize()
     {
         connectedControllers = Input.GetJoystickNames();
-        Debug.Log("Joystick names :" + connectedControllers[0]);
         players = new List<Player>();
         CreatePlayers();
         InitializePlayersPositions();
