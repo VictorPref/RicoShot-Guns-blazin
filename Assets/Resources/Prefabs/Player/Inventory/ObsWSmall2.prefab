@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4001252334866096}
+  - component: {fileID: 114536587212549640}
   m_Layer: 0
   m_Name: ObsWSmall2
   m_TagString: Untagged
@@ -69,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1071310290005202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: -0.704, z: 0.029174805}
+  m_LocalPosition: {x: -0.4223529, y: -0.704, z: 0.029174805}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4709509325024162}
@@ -235,3 +236,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.99797446}
   m_EdgeRadius: 0
+--- !u!114 &114536587212549640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1071310290005202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3848047ddcdd4e542a1a92fa90bb668b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placer: 0
+  destroy: 0

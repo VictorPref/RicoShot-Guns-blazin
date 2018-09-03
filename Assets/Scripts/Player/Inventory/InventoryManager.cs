@@ -13,18 +13,21 @@ public class InventoryManager : MonoBehaviour {
                 if (instance == null)
                 {
                     instance = new InventoryManager();
+                    initialization();
 
                 }
                 return instance;
         }
     }
 
-    Inventory inventory;
+    public static Inventory inventory;
 
-    public void initialization()
+    static void initialization()
     {
         inventory = new Inventory();
+        inventory.initialization();
     }
+
 
 
 }
