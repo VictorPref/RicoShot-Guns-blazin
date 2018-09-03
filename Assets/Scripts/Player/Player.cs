@@ -17,7 +17,19 @@ public class Player : MonoBehaviour {
     float rotationSpeed = -50;
 
     int chargeur;
-    int currentObstacle = 0;
+
+
+    InventoryManager inventory;
+
+    bool inPhase1 = false;
+    float obstacleMovementSpeed = 0.2f;
+    bool obstaclePoser = false;
+
+    ObstacleManager obstacleManager;
+    bool LTon = false;
+    bool BButton = false;
+
+
 
     public void setPlayerId(int playerId)
     {
@@ -25,6 +37,9 @@ public class Player : MonoBehaviour {
         inputManager = new InputManager();
         timeShoot = Time.time;
         chargeur = CHARGE_MAX;
+        inventory = InventoryManager.Instance;
+        obstacleManager = new ObstacleManager();
+        obstacleManager.id_player = playerId;
     }
 
 
@@ -37,11 +52,13 @@ public class Player : MonoBehaviour {
         if(inputPkg.rb)
         {
             UpdatePhase2(inputPkg);
-          
+            obstacleManager.DeleteObstacle();
+
         }
         else
         {
             UpdatePhase1(inputPkg);
+            
 
         }
         
@@ -49,10 +66,86 @@ public class Player : MonoBehaviour {
 
      void UpdatePhase1(InputManager.InputPkg inputPkg) {
 
+        //If in Phase 1 create Object 1 time
+        if(inPhase1 == false)
+        {
+            obstacleManager.CreateObstacle();
+        }
+        else
+        {
+            //Update the obstacleManager with the left joystick and right joystick
+            obstacleManager.Update(new Vector3(inputPkg.leftDir.x, inputPkg.leftDir.y, 0) * obstacleMovementSpeed,inputPkg.rightDir.x);
+            
+            //if button A pressed one obstacle is placed and the player can't spam 
+            if (inputPkg.A && !obstaclePoser)
+            {
+                obstacleManager.setObstacle();
+
+                obstaclePoser = true;
+            }
+            //if button A is not pressed unlock the possibility of placing an obstacle
+            else if (!inputPkg.A)
+            {
+                obstaclePoser = false;
+            }
+
+            // if Y is pressed player can go trought the list of obstacle on the field and delete them
+            if (inputPkg.Y)
+            {
+                Debug.Log("Y Obstacle");
+                
+                //Rt button pressed go up in the list of obstacle place on the field
+                if (inputPkg.rt)
+                {
+                    obstacleManager.SelectedObstaclePlus();
+                }
+                //Lt button pressed go down in the list of obstacle place on the field
+                if (inputPkg.lt)
+                {
+                    obstacleManager.SelectedObstacleMoins();
+                }
+                //B button pressed delete obstacle on the field and lock the possibility once B is pressed
+                if (inputPkg.B && !BButton )
+                {
+                    BButton = true;
+                    obstacleManager.DeleteSelectedObstacle();
+                }
+                //Unlock possibility of deleting an obstacle once B is not pressed
+                else if (!inputPkg.B)
+                {
+                    BButton = false;
+                }
+
+            }
+             //Change between the type of obstacle 
+            else if (inputPkg.rt)
+            {
+                obstacleManager.changeObstaclePlus();
+            }
+            //Change between the type of obstacle
+            //Weird behaviour with the LT button that the RT button doesn't have so we need to lock the lt button once its pressed
+            else if (inputPkg.lt && !LTon)
+            {
+                obstacleManager.changeObstacleMoins();
+                LTon = true;
+            }
+            // unlock the LT button once its not pressed
+            if (!inputPkg.lt)
+            {
+                LTon = false;
+            }
+            
+        }
+        inPhase1 = true;
 
     }
 
+   
+
      void UpdatePhase2(InputManager.InputPkg inputPkg) {
+        //In phase 2
+        inPhase1 = false;
+
 
         //Rotate the Player and send Input information about the left Joystick
         RotatePlayer(inputPkg.leftDir);
@@ -88,10 +181,6 @@ public class Player : MonoBehaviour {
     {
         if (reload)
             chargeur = CHARGE_MAX;
-    }
-
-    void CycleObstacles() {
-
     }
 
     public void PlayerFixedUpdate()
