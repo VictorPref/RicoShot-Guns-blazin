@@ -43,6 +43,7 @@ public class FlowManager
                 break;
             case FlowType.MainMenuFlow:
                 //Flow for the menu
+                currentFlow = new MainMenuFlow();
                
                 break;
             default:

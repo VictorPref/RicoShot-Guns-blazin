@@ -8,27 +8,26 @@ public class PlayVideo : MonoBehaviour {
 
     public RawImage rawImage;
     public VideoPlayer videoPlayer;
-    public AudioSource audio;
 
-
-	// Use this for initialization
-	void Start () {
-
+   public void initialization()
+    {
         StartCoroutine(Video());
 
-	}
+    }
 
     IEnumerator Video()
     {
-        videoPlayer.Prepare();
-        WaitForSeconds waitForSeconds = new WaitForSeconds(1);
-        while (!videoPlayer.isPrepared)
+        if (videoPlayer)
         {
-            yield return waitForSeconds;
-            break;
+            videoPlayer.Prepare();
+            WaitForSeconds waitForSeconds = new WaitForSeconds(0.25f);
+            while (!videoPlayer.isPrepared)
+            {
+                yield return waitForSeconds;
+                break;
+            }
+            rawImage.texture = videoPlayer.texture;
+            videoPlayer.Play();
         }
-        rawImage.texture = videoPlayer.texture;
-        videoPlayer.Play();
-        audio.Play();
     }
 }
