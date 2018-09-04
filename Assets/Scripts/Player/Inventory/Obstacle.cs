@@ -8,10 +8,6 @@ public class Obstacle : MonoBehaviour
     public bool isFixed = false;
     public bool destroy = false;
 
-    public void Initialization(int obstacleNum)
-    {
-
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isFixed)
@@ -19,7 +15,7 @@ public class Obstacle : MonoBehaviour
         if (lifespan <= 0)
         {
             destroy = true;
-            Destroy(gameObject,0.1f);
+            DestroyObstacle();
         }
     }
 
@@ -30,7 +26,7 @@ public class Obstacle : MonoBehaviour
     }
     public void DestroyObstacle()
     {
-        Destroy(gameObject);
+        Destroy(gameObject,0.05f);
     }
 
 
