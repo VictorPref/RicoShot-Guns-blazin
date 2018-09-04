@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33293505111076086}
   - component: {fileID: 65464583101084310}
   - component: {fileID: 23281821650975182}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 23466649403947998}
   - component: {fileID: 114213874266149470}
   - component: {fileID: 60899295892215146}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PlayerTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}

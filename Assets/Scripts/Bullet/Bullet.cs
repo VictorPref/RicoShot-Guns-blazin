@@ -9,8 +9,7 @@ public class Bullet : MonoBehaviour
     CircleCollider2D collider;
     Vector3 currDir;
     Vector2 destination;
-    float initialSpeed = 15, minSpeed = 3;
-
+    float initialSpeed = 15, minSpeed = 3, colliderWeight = 0.3f;
     float angle, rayLength = 1.5f, bounciness = 0.75f;
 
     public void initialization()
@@ -22,9 +21,11 @@ public class Bullet : MonoBehaviour
     }
     public void UpdateBullet()
     {
-        LayerMask mask = 1 << LayerMask.NameToLayer("NeutralObstacle") | 1 << gameObject.layer;
+        LayerMask mask = 1 << LayerMask.NameToLayer("NeutralObstacle") | 1 << gameObject.layer | 1 << LayerMask.NameToLayer("Player");
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, rayLength, mask); //raycasting to verify collision with mask
+
+        Debug.DrawLine(transform.position, transform.position+ transform.right * rayLength);
 
         for (int i = 0; i < hits.Length; i++)
         {           
@@ -32,8 +33,9 @@ public class Bullet : MonoBehaviour
 
             if (collider.IsTouching(hits[i].collider)) 
             {
+           //if( Mathf.Abs(transform.position.x - hits[i].point.x) < colliderWeight && Mathf.Abs(transform.position.y - hits[i].point.y) < colliderWeight) { 
                 maxRicochets--;
-                angle = Vector2.Angle(transform.right, Vector2.Reflect(transform.right, hits[i].normal)); //retrieving angle formed by incoming direction and its reflection
+                angle = Vector2.Angle(transform.right, reflected); //retrieving angle formed by incoming direction and its reflection
 
                 //this check and the three next are to make sure the rotation angle goes clockwise if needed
                 if (transform.right.x > 0 && reflected.x > 0 && transform.position.y > transform.position.y+ reflected.y) {
@@ -53,7 +55,7 @@ public class Bullet : MonoBehaviour
                 }
                 //applying new velocity following the reflected direction
                 initialSpeed *= bounciness;
-                rb.velocity = Vector2.Reflect(transform.right, hits[i].normal) * initialSpeed;
+                rb.velocity = reflected * initialSpeed;
                 //rotating the sprite's transform
                 transform.Rotate(new Vector3(0, 0, 1), angle);
             }

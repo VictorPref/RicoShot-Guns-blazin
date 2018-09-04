@@ -49,7 +49,7 @@ public class Player : MonoBehaviour {
         InputManager.InputPkg inputPkg = inputManager.GetKeysInput(playerId);
        
         //Go to Phase 2 if input rb is press
-        if(inputPkg.rb)
+        if(inputPkg.X)
         {
             UpdatePhase2(inputPkg);
             obstacleManager.DeleteObstacle();
@@ -93,12 +93,12 @@ public class Player : MonoBehaviour {
                 Debug.Log("Y Obstacle");
                 
                 //Rt button pressed go up in the list of obstacle place on the field
-                if (inputPkg.rt)
+                if (inputPkg.lt > 0)
                 {
                     obstacleManager.SelectedObstacleForward();
                 }
                 //Lt button pressed go down in the list of obstacle place on the field
-                if (inputPkg.lt)
+                if (inputPkg.lt < 0)
                 {
                     obstacleManager.SelectedObstacleBack();
                 }
@@ -116,19 +116,19 @@ public class Player : MonoBehaviour {
 
             }
              //Change between the type of obstacle 
-            else if (inputPkg.rt)
+            else if (inputPkg.lt > 0)
             {
                 obstacleManager.changeObstaclePlus();
             }
             //Change between the type of obstacle
             //Weird behaviour with the LT button that the RT button doesn't have so we need to lock the LT button once its pressed
-            else if (inputPkg.lt && !isLeftTriggerPressed)
+            else if (inputPkg.lt < 0 )// !isLeftTriggerPressed)
             {
                 obstacleManager.changeObstacleMoins();
                 isLeftTriggerPressed = true;
             }
             // unlock the LT button once its not pressed
-            if (!inputPkg.lt)
+            if (inputPkg.lt == 0)
             {
                 isLeftTriggerPressed = false;
             }
@@ -150,10 +150,10 @@ public class Player : MonoBehaviour {
 
 
         //Player Shoot and send rt input information
-        Shoot(inputPkg.rt);
+        Shoot(inputPkg.A);
 
         //Player can Reload
-        Reload(inputPkg.X);
+        Reload(inputPkg.B);
     }
 
 

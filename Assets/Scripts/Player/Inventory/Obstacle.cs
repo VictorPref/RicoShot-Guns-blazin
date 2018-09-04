@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    int lifespan = 3;
+    int lifespan = 200;
     public bool isFixed = false;
     public bool destroy = false;
 
@@ -19,7 +19,7 @@ public class Obstacle : MonoBehaviour
         if (lifespan <= 0)
         {
             destroy = true;
-            Destroy(gameObject,0.05f);
+            Destroy(gameObject,0.1f);
         }
     }
 
