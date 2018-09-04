@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleManager {
-    int nbObstalceMax = 3;
+    int nbObstacleMax = 3;
     int obstacleNum = 0;
     List<Obstacle> obstacles = new List<Obstacle>();
-    GameObject Gameobstacle;
+    GameObject gameObject;
     Obstacle obstacle;
-     public int listElement = 0;
     Obstacle selectedObstacle;
-    public int id_player;
     int nbBaseLayer = 7;
+    public int listElement = 0;
+    public int id_player;
 
     public void CreateObstacle()
     {
         //Create the obstacle
-        Gameobstacle = GameObject.Instantiate(InventoryManager.inventory.getObstacle(obstacleNum));
+        gameObject = GameObject.Instantiate(InventoryManager.inventory.getObstacle(obstacleNum));
 
         //Get the script on the prefab
-        obstacle = Gameobstacle.GetComponent<Obstacle>();
+        obstacle = gameObject.GetComponent<Obstacle>();
     }
     public void Update(Vector3 pos,float rotation)
     {
@@ -35,7 +35,6 @@ public class ObstacleManager {
                 obstacles.Remove(temp);  
             }
         }
-
     }
     
 
@@ -45,12 +44,12 @@ public class ObstacleManager {
         obstacleNum++;
 
         //check if the number for the obstacle selected is bigger than the max array of obstacle 
-        if(obstacleNum >= InventoryManager.inventory.getTaille())
+        if(obstacleNum >= InventoryManager.inventory.getLength())
         {
             //set the number for the obstacle selected to 0
             obstacleNum = 0;
         }
-        GameObject.Destroy(Gameobstacle);
+        GameObject.Destroy(gameObject);
         CreateObstacle();
     }
 
@@ -62,23 +61,22 @@ public class ObstacleManager {
         if (obstacleNum <= -1)
         {
             //set the number for the obstacle selected to the array size
-            obstacleNum = InventoryManager.inventory.getTaille()-1;
+            obstacleNum = InventoryManager.inventory.getLength()-1;
         }
-        GameObject.Destroy(Gameobstacle);
+        GameObject.Destroy(gameObject);
         CreateObstacle();
-
     }
 
     //Set the obstacle on the field and add it to the list of obstacle on the field
     public void setObstacle()
     {
         //Check if the lists of obstacle is less than the number max of obstacle on the level
-       if(obstacles.Count < nbObstalceMax)
+       if(obstacles.Count < nbObstacleMax)
         {
             //Add the obstacle to the list
-            Gameobstacle.layer = nbBaseLayer + id_player;
+            gameObject.layer = nbBaseLayer + id_player;
             obstacles.Add(obstacle);
-            obstacle.placer = true;
+            obstacle.isFixed = true;
 
             CreateObstacle();
         }
@@ -87,7 +85,7 @@ public class ObstacleManager {
     //Detele obstacle
     public void DeleteObstacle()
     {
-        GameObject.Destroy(Gameobstacle);
+        GameObject.Destroy(gameObject);
     }
 
     //Select Obstacle from the existing obstacle
@@ -102,12 +100,12 @@ public class ObstacleManager {
         SelectFromList();
         obstacles.Remove(selectedObstacle);
         selectedObstacle.DestroyObstacle();
-        SelectedObstaclePlus();
+        SelectedObstacleForward();
        
     }
 
     //Change the selected obstacle plus one in the list
-    public void SelectedObstaclePlus()
+    public void SelectedObstacleForward()
     {
         listElement++;
         if(listElement > obstacles.Count - 1)
@@ -116,7 +114,7 @@ public class ObstacleManager {
         }
     }
     //Change the selected obstacle minus one in the list
-    public void SelectedObstacleMoins()
+    public void SelectedObstacleBack()
     {
         listElement--;
         if (listElement < 0)

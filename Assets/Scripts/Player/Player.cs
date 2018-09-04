@@ -23,11 +23,11 @@ public class Player : MonoBehaviour {
 
     bool inPhase1 = false;
     float obstacleMovementSpeed = 0.2f;
-    bool obstaclePoser = false;
+    bool isObstacleFixed = false;
 
     ObstacleManager obstacleManager;
-    bool LTon = false;
-    bool BButton = false;
+    bool isLeftTriggerPressed = false;
+    bool bButton = false;
 
 
 
@@ -58,8 +58,6 @@ public class Player : MonoBehaviour {
         else
         {
             UpdatePhase1(inputPkg);
-            
-
         }
         
     }
@@ -77,16 +75,16 @@ public class Player : MonoBehaviour {
             obstacleManager.Update(new Vector3(inputPkg.leftDir.x, inputPkg.leftDir.y, 0) * obstacleMovementSpeed,inputPkg.rightDir.x);
             
             //if button A pressed one obstacle is placed and the player can't spam 
-            if (inputPkg.A && !obstaclePoser)
+            if (inputPkg.A && !isObstacleFixed)
             {
                 obstacleManager.setObstacle();
 
-                obstaclePoser = true;
+                isObstacleFixed = true;
             }
             //if button A is not pressed unlock the possibility of placing an obstacle
             else if (!inputPkg.A)
             {
-                obstaclePoser = false;
+                isObstacleFixed = false;
             }
 
             // if Y is pressed player can go trought the list of obstacle on the field and delete them
@@ -97,23 +95,23 @@ public class Player : MonoBehaviour {
                 //Rt button pressed go up in the list of obstacle place on the field
                 if (inputPkg.rt)
                 {
-                    obstacleManager.SelectedObstaclePlus();
+                    obstacleManager.SelectedObstacleForward();
                 }
                 //Lt button pressed go down in the list of obstacle place on the field
                 if (inputPkg.lt)
                 {
-                    obstacleManager.SelectedObstacleMoins();
+                    obstacleManager.SelectedObstacleBack();
                 }
                 //B button pressed delete obstacle on the field and lock the possibility once B is pressed
-                if (inputPkg.B && !BButton )
+                if (inputPkg.B && !bButton )
                 {
-                    BButton = true;
+                    bButton = true;
                     obstacleManager.DeleteSelectedObstacle();
                 }
                 //Unlock possibility of deleting an obstacle once B is not pressed
                 else if (!inputPkg.B)
                 {
-                    BButton = false;
+                    bButton = false;
                 }
 
             }
@@ -123,16 +121,16 @@ public class Player : MonoBehaviour {
                 obstacleManager.changeObstaclePlus();
             }
             //Change between the type of obstacle
-            //Weird behaviour with the LT button that the RT button doesn't have so we need to lock the lt button once its pressed
-            else if (inputPkg.lt && !LTon)
+            //Weird behaviour with the LT button that the RT button doesn't have so we need to lock the LT button once its pressed
+            else if (inputPkg.lt && !isLeftTriggerPressed)
             {
                 obstacleManager.changeObstacleMoins();
-                LTon = true;
+                isLeftTriggerPressed = true;
             }
             // unlock the LT button once its not pressed
             if (!inputPkg.lt)
             {
-                LTon = false;
+                isLeftTriggerPressed = false;
             }
             
         }

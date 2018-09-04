@@ -27,7 +27,4 @@ public class InventoryManager : MonoBehaviour {
         inventory = new Inventory();
         inventory.initialization();
     }
-
-
-
 }

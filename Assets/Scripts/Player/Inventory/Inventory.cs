@@ -9,11 +9,10 @@ public class Inventory  {
 
     public void initialization()
     {
-        listes = Resources.LoadAll("Prefabs/Player/Inventory", typeof(GameObject)) .Cast<GameObject>() .ToArray();
-
+        listes = Resources.LoadAll("Prefabs/Player/Inventory", typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
-    public int getTaille()
+    public int getLength()
     {
         return listes.Length;
     }

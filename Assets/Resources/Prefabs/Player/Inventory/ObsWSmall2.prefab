@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4001252334866096}
   - component: {fileID: 114536587212549640}
+  - component: {fileID: 50949264715545812}
+  - component: {fileID: 66290348505278118}
   m_Layer: 0
   m_Name: ObsWSmall2
   m_TagString: Untagged
@@ -70,8 +72,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1071310290005202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4223529, y: -0.704, z: 0.029174805}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.55, y: 1.727812, z: 1}
   m_Children:
   - {fileID: 4709509325024162}
   - {fileID: 4783847911552162}
@@ -186,6 +188,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1656864670677508}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!50 &50949264715545812
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1071310290005202}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61063784474403142
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -197,7 +219,7 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: 0e3cbfee05d0d0c47b4f65c9a8fcaa98, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: -0.0035687983}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,7 +244,7 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: 0e3cbfee05d0d0c47b4f65c9a8fcaa98, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: -0.0035687983}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,6 +258,54 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.99797446}
   m_EdgeRadius: 0
+--- !u!66 &66290348505278118
+CompositeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1071310290005202}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 61175317245712332}
+    m_ColliderPaths:
+    - - X: 7074027
+        Y: 3461639
+      - X: 6226365
+        Y: 5098260
+      - X: -7169838
+        Y: -3523301
+      - X: -6322176
+        Y: -5159922
+  - m_Collider: {fileID: 61063784474403142}
+    m_ColliderPaths:
+    - - X: -5509145
+        Y: -3523269
+      - X: -18905348
+        Y: 5098292
+      - X: -19753044
+        Y: 3461607
+      - X: -6356840
+        Y: -5159954
+  m_CompositePaths:
+    m_Paths:
+    - - {x: -0.63395, y: -0.5126474}
+      - {x: -0.6322176, y: -0.5159922}
+      - {x: 0.7074027, y: 0.3461639}
+      - {x: 0.6226365, y: 0.509826}
+      - {x: -0.6339467, y: -0.2988889}
+      - {x: -1.8905349, y: 0.5098292}
+      - {x: -1.9753044, y: 0.3461607}
+      - {x: -0.635684, y: -0.5159954}
+  m_VertexDistance: 0.0005
 --- !u!114 &114536587212549640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,5 +317,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3848047ddcdd4e542a1a92fa90bb668b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placer: 0
+  isFixed: 0
   destroy: 0
