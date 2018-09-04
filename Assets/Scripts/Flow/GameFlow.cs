@@ -18,21 +18,17 @@ public class GameFlow : Flow {
         playerManager = PlayerManager.Instance;
         levelManager.GenerateLevel(CURRENTLEVELTESTED);       
         playerManager.Initialize();
-        Debug.Log("init GameFlow");
     }
     public override void Update(float dt)
     {
         base.Update(dt);
-        playerManager.Update();
-        Debug.Log("Update GameFlow"); 
+        playerManager.Update(); 
         bulletManager.Update();
     }
 
     public override void FixedUpdate(float dt)
     {
         base.FixedUpdate(dt);
-
-
     }
 
 }

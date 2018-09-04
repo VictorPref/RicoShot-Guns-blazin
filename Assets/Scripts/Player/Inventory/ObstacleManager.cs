@@ -7,6 +7,8 @@ public class ObstacleManager {
     int obstacleNum = 0;
     List<Obstacle> obstacles = new List<Obstacle>();
     GameObject gameObject;
+    MeshRenderer meshRenderer;
+    Material material;
     Obstacle obstacle;
     Obstacle selectedObstacle;
     int nbBaseLayer = 7;
@@ -17,6 +19,10 @@ public class ObstacleManager {
     {
         //Create the obstacle
         gameObject = GameObject.Instantiate(InventoryManager.inventory.getObstacle(obstacleNum));
+
+        //Fetch materials for coloring purposes
+        meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
+        material = meshRenderer.material;
 
         //Get the script on the prefab
         obstacle = gameObject.GetComponent<Obstacle>();
@@ -75,6 +81,10 @@ public class ObstacleManager {
         {
             //Add the obstacle to the list
             gameObject.layer = nbBaseLayer + id_player;
+
+            //add color corresponding to playerId  
+            material.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
+
             obstacles.Add(obstacle);
             obstacle.isFixed = true;
 

@@ -70,7 +70,8 @@ public class PlayerManager
             {
                 if (!string.IsNullOrEmpty(connectedControllers[i]))
                 {
-                    GameObject playerObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Player/PlayerTest")); //Create an instance of the player
+                    //Create an instance of the player
+                    GameObject playerObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Player/PlayerTest")); 
                     playerObject.transform.position = new Vector2();
                     Player newPlayer = playerObject.GetComponent<Player>();
                     newPlayer.setPlayerId(i + 1); //+1 because id should not be 0
@@ -79,7 +80,6 @@ public class PlayerManager
             }
 
         }
-
     }
 
     void RemovePlayer()
@@ -102,7 +102,15 @@ public class PlayerManager
     {
         //check for controllers plugged in/out
         //update player list accordingly
-        yield return new WaitForSeconds(INPUTCHECKDELAY);
+        while (true) {
+
+            yield return new WaitForSeconds(INPUTCHECKDELAY);
+        }
+        
+    }
+
+    public bool isLastManStanding() {
+        return players.Count == 1 ? true : false;
     }
 
     public void DeleteManager()

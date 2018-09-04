@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    int lifespan = 200;
+    int lifespan = 3;
     public bool isFixed = false;
     public bool destroy = false;
 

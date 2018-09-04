@@ -31,8 +31,6 @@ public class InputManager : MonoBehaviour {
         toRet.rightDir = new Vector2(right_horizontal, 0);
         toRet.lt = lt;
         toRet.rt = rt;
-        Debug.Log("lt value:" + lt);
-        Debug.Log("lt value:" + rt);
         toRet.A = A != 0 ? true:false;
         toRet.B = B != 0 ? true : false;
         toRet.X = X != 0 ? true : false;
