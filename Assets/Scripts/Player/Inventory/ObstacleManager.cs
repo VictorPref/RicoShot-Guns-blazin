@@ -97,11 +97,13 @@ public class ObstacleManager {
     //Delete the selected obstacle from the list
     public void DeleteSelectedObstacle()
     {
-        SelectFromList();
-        obstacles.Remove(selectedObstacle);
-        selectedObstacle.DestroyObstacle();
-        SelectedObstacleForward();
-       
+        if (obstacles.Count > 0)
+        {
+            SelectFromList();
+            obstacles.Remove(selectedObstacle);
+            selectedObstacle.DestroyObstacle();
+            SelectedObstacleForward();
+        }
     }
 
     //Change the selected obstacle plus one in the list

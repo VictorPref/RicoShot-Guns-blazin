@@ -19,7 +19,7 @@ public class Obstacle : MonoBehaviour
         if (lifespan <= 0)
         {
             destroy = true;
-            Destroy(gameObject);
+            Destroy(gameObject,0.05f);
         }
     }
 
