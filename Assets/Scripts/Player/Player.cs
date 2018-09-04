@@ -2,44 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum PlayerColor { BLUE, RED, GREEN, YELLOW };
-enum ObstacleType { ObsMSmall1, ObsMSmall2, ObsWSmall1, ObsWSmall2 };
-
 public class Player : MonoBehaviour {
 
-    readonly int CHARGE_MAX = 6;
-    readonly int CHARGE_MIN = 0;
-
-    public GameObject gun;
+    readonly int MAX_BULLETS = 6;
+    readonly int MIN_BULLETS = 0;
+   
     InputManager inputManager;
     int playerId;
-    float timeShoot;
     float rotationSpeed = -50;
-
-    int chargeur;
-
+    int bulletsRemaining;
+    public GameObject gun;
 
     InventoryManager inventory;
-
     bool inPhase1 = false;
     float obstacleMovementSpeed = 0.2f;
     bool isObstacleFixed = false;
+    public Color playerColor;
 
     ObstacleManager obstacleManager;
     bool isLeftTriggerPressed = false;
     bool bButton = false;
 
-
-
     public void setPlayerId(int playerId)
     {
         this.playerId = playerId;
         inputManager = new InputManager();
-        timeShoot = Time.time;
-        chargeur = CHARGE_MAX;
+        bulletsRemaining = MAX_BULLETS;
         inventory = InventoryManager.Instance;
         obstacleManager = new ObstacleManager();
         obstacleManager.id_player = playerId;
+        setPlayerColor(playerId);
+    }
+
+    public void setPlayerColor(int playerId) {
+        switch (playerId) {
+            case 1:
+                playerColor = Color.blue;
+                break;
+            case 2:
+                playerColor = Color.red;
+                break;
+            case 3:
+                playerColor = Color.yellow;
+                break;
+            case 4:
+                playerColor = Color.green;
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -89,9 +100,7 @@ public class Player : MonoBehaviour {
 
             // if Y is pressed player can go trought the list of obstacle on the field and delete them
             if (inputPkg.Y)
-            {
-                Debug.Log("Y Obstacle");
-                
+            {                
                 //Rt button pressed go up in the list of obstacle place on the field
                 if (inputPkg.lt > 0)
                 {
@@ -168,17 +177,18 @@ public class Player : MonoBehaviour {
     {
 
         //Can shoot if the input is true
-        if (shoot && chargeur > CHARGE_MIN)
+        if (shoot && bulletsRemaining > MIN_BULLETS)
         {
             BulletManager.Instance.CreateBullet(gun.transform.position+gun.transform.right ,new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.z),playerId);
-            chargeur--;  
+            bulletsRemaining--;
+            Debug.LogError("in shoot");
         }
         
     }
     void Reload(bool reload)
     {
         if (reload)
-            chargeur = CHARGE_MAX;
+            bulletsRemaining = MAX_BULLETS;
     }
 
     public void PlayerFixedUpdate()

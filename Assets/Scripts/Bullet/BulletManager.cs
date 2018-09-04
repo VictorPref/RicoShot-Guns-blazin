@@ -7,8 +7,9 @@ public sealed class BulletManager
     private static BulletManager instance = null;
 
     List<Bullet> bullets = new List<Bullet>();
-    int nbBaseLayer = 7;
+    int nbBaseLayers = 7; //the number of default layers in unity, so we can jump to the ones we created by using playerId
 
+    #region Singleton
     public static BulletManager Instance
     {
         get
@@ -16,26 +17,18 @@ public sealed class BulletManager
             if (instance == null)
             {
                 instance = new BulletManager();
-
             }
             return instance;
         }
     }
-
-    public void initialization()
-    {
-
-    }
+    #endregion
 
     public void Update()
     {
-
         if (bullets != null)
         {
-
             foreach (Bullet bullet in bullets)
             {
-
                 if (bullet != null)
                 {
                     bullet.UpdateBullet();
@@ -44,24 +37,24 @@ public sealed class BulletManager
         }
     }
 
-    public void CreateBullet(Vector2 SpawnLocation, Vector2 rotation, int id)
+    public void CreateBullet(Vector2 spawnLocation, Vector2 rotation, int id)
     {
-        GameObject bulletObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Bullet/Bullet")); //Create Bullet
+        //Create Bullet object
+        GameObject bulletObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Bullet/Bullet")); 
         if (!bulletObject)
         {
-            Debug.LogError("Didn't find enemy resources at Prefabs/Bullet/Bullet");
+            Debug.LogError("Couldn't find enemy resources at Prefabs/Bullet/Bullet");
             return;
         }
-        bulletObject.transform.position = SpawnLocation;
-        bulletObject.transform.Rotate(new Vector3(rotation.x, 0, rotation.y));
-        bulletObject.layer = nbBaseLayer + id;
-
+        //Bullet takes the player's gun's transform and rotation for its position
+        bulletObject.transform.position = spawnLocation;
+        bulletObject.transform.Rotate(new Vector3(0, 0, rotation.y));
+        //bullet is assigned player's object's (obstacles and bullets) layer
+        bulletObject.layer = nbBaseLayers + id; 
 
         Bullet b = bulletObject.GetComponent<Bullet>();
         b.initialization();
 
         bullets.Add(b);
-
-
     }
 }
