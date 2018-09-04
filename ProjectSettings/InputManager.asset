@@ -803,7 +803,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 8
+    axis: 5
     joyNum: 1
   - serializedVersion: 3
     m_Name: P2_LT
@@ -819,7 +819,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 8
+    axis: 5
     joyNum: 2
   - serializedVersion: 3
     m_Name: P3_LT
@@ -835,7 +835,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 8
+    axis: 5
     joyNum: 3
   - serializedVersion: 3
     m_Name: P4_LT
@@ -851,7 +851,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 8
+    axis: 5
     joyNum: 4
   - serializedVersion: 3
     m_Name: P1_RT

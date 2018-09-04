@@ -29,6 +29,10 @@ public class InputManager : MonoBehaviour {
         //Fill the package
         toRet.leftDir = new Vector2(left_horizontal, left_vertical);
         toRet.rightDir = new Vector2(right_horizontal, 0);
+        toRet.lt = lt;
+        toRet.rt = rt;
+        Debug.Log("lt value:" + lt);
+        Debug.Log("lt value:" + rt);
         toRet.A = A != 0 ? true:false;
         toRet.B = B != 0 ? true : false;
         toRet.X = X != 0 ? true : false;
@@ -38,12 +42,10 @@ public class InputManager : MonoBehaviour {
         toRet.lb = lb != 0 ? true : false;
 
 
-        toRet.rt = rt != 0 ? true : false;
 
         //Check if the input is already pressed so player can't spam the bullet
-        IsShooting(ref toRet.rt);
+        IsShooting(ref toRet.A);
 
-        toRet.lt = lt != 0 ? true : false;
         toRet.id = id;
 
         //return package
@@ -79,8 +81,8 @@ public class InputManager : MonoBehaviour {
         public bool start;
         public bool rb;
         public bool lb;
-        public bool rt;
-        public bool lt;
+        public float rt;
+        public float lt;
         public int id;
 
         override
