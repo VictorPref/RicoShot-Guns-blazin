@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class LevelManager {
 
-    private Level currentLevel;
+    public Level currentLevel;
+    private GameObject levelObject;
+    public int lvlNumber;
 
     #region Singleton
     private LevelManager()
@@ -24,14 +26,36 @@ public class LevelManager {
     #endregion
 
     public void GenerateLevel(int lvlNumber) { 
-        GameObject levelObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Levels/Level" + lvlNumber)); //Create level
+        levelObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Levels/Level" + lvlNumber)); //Create level
+        if (!levelObject)
+        {
+            Debug.LogError("Didn't find any resources at Prefabs/Levels/Level" + lvlNumber);
+            return;
+        }
+        this.lvlNumber = lvlNumber;
+        levelObject.transform.position = new Vector2();
+
+        currentLevel = levelObject.GetComponent<Level>();
+        currentLevel.Initialize();
+
+
+    }
+
+    public void ResetLevel(int lvlNumber) {
+        GameObject.Destroy(levelObject);
+        
+        levelObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Levels/Level" + lvlNumber)); //Create level
+        currentLevel = levelObject.GetComponent<Level>();
+        currentLevel.Initialize();
+
+        PlayerManager.Instance.ActivatePlayers();
         if (!levelObject)
         {
             Debug.LogError("Didn't find any resources at Prefabs/Levels/Level" + lvlNumber);
             return;
         }
         levelObject.transform.position = new Vector2();
-
+        PlayerManager.Instance.InitializePlayersPositions();
         currentLevel = levelObject.GetComponent<Level>();
     }
 
@@ -39,15 +63,16 @@ public class LevelManager {
        
     }
 
-    public List<Vector2> RetrievePlayersSpawnPositions() {
+    public List<Transform> RetrievePlayersSpawnPositions() {
         int playerCount = PlayerManager.Instance.GetPlayers().Count;
         int i = 1;
-        List<Vector2> resultList = new List<Vector2>();
+        List<Transform> resultList = currentLevel.playerPositions;
 
-        while (i <= playerCount) {
-            resultList.Add(GameObject.FindGameObjectWithTag("Player" + i).transform.position);
-            i++;
-        }
+        //while (i <= playerCount) {
+            // resultList.Add(GameObject.FindGameObjectWithTag("Player" + i).transform.position);
+        //    resultList.Add(currentLeve);
+        //    i++;
+       // }
 
         return resultList;
     }

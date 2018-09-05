@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     readonly int MAX_BULLETS = 6;
     readonly int MIN_BULLETS = 0;
-   
+
     InputManager inputManager;
     int playerId;
     float rotationSpeed = -50;
@@ -23,7 +24,11 @@ public class Player : MonoBehaviour {
     bool isLeftTriggerPressed = false;
     bool bButton = false;
 
-    public void setPlayerId(int playerId)
+    public int roundsWon = 0;
+    public bool isAlive = true;
+
+
+    public void Initialize(int playerId)
     {
         this.playerId = playerId;
         inputManager = new InputManager();
@@ -31,11 +36,26 @@ public class Player : MonoBehaviour {
         inventory = InventoryManager.Instance;
         obstacleManager = new ObstacleManager();
         obstacleManager.id_player = playerId;
-        setPlayerColor(playerId);
+        SetPlayerColor(playerId);
+        gameObject.SetActive(true);
     }
 
-    public void setPlayerColor(int playerId) {
-        switch (playerId) {
+    public void ResetPlayer() {
+        bulletsRemaining = MAX_BULLETS;
+        gameObject.SetActive(true);
+        isAlive = true;
+        obstacleManager.ResetObstacleList();
+    }
+
+    public int GetPlayerId()
+    {
+        return playerId;
+    }
+
+    public void SetPlayerColor(int playerId)
+    {
+        switch (playerId)
+        {
             case 1:
                 playerColor = Color.blue;
                 break;
@@ -56,35 +76,39 @@ public class Player : MonoBehaviour {
 
     public void UpdatePlayer()
     {
-        //Get Package of Controller Input
-        InputManager.InputPkg inputPkg = inputManager.GetKeysInput(playerId);
-       
-        //Go to Phase 2 if input rb is press
-        if(inputPkg.X)
+        if (isAlive)
         {
-            UpdatePhase2(inputPkg);
-            obstacleManager.DeleteObstacle();
+            //Get Package of Controller Input
+            InputManager.InputPkg inputPkg = inputManager.GetKeysInput(playerId);
 
+            //Go to Phase 2 if input rb is press
+            if (inputPkg.X)
+            {
+                UpdatePhase2(inputPkg);
+                obstacleManager.DeleteObstacle();
+
+            }
+            else
+            {
+                UpdatePhase1(inputPkg);
+            }
         }
-        else
-        {
-            UpdatePhase1(inputPkg);
-        }
-        
+
     }
 
-     void UpdatePhase1(InputManager.InputPkg inputPkg) {
+    void UpdatePhase1(InputManager.InputPkg inputPkg)
+    {
 
         //If in Phase 1 create Object 1 time
-        if(inPhase1 == false)
+        if (inPhase1 == false)
         {
             obstacleManager.CreateObstacle();
         }
         else
         {
             //Update the obstacleManager with the left joystick and right joystick
-            obstacleManager.Update(new Vector3(inputPkg.leftDir.x, inputPkg.leftDir.y, 0) * obstacleMovementSpeed,inputPkg.rightDir.x);
-            
+            obstacleManager.Update(new Vector3(inputPkg.leftDir.x, inputPkg.leftDir.y, 0) * obstacleMovementSpeed, inputPkg.rightDir.x);
+            Debug.Log("input a" + inputPkg.A);
             //if button A pressed one obstacle is placed and the player can't spam 
             if (inputPkg.A && !isObstacleFixed)
             {
@@ -100,7 +124,7 @@ public class Player : MonoBehaviour {
 
             // if Y is pressed player can go trought the list of obstacle on the field and delete them
             if (inputPkg.Y)
-            {                
+            {
                 //Rt button pressed go up in the list of obstacle place on the field
                 if (inputPkg.lt > 0)
                 {
@@ -112,7 +136,7 @@ public class Player : MonoBehaviour {
                     obstacleManager.SelectedObstacleBack();
                 }
                 //B button pressed delete obstacle on the field and lock the possibility once B is pressed
-                if (inputPkg.B && !bButton )
+                if (inputPkg.B && !bButton)
                 {
                     bButton = true;
                     obstacleManager.DeleteSelectedObstacle();
@@ -124,14 +148,14 @@ public class Player : MonoBehaviour {
                 }
 
             }
-             //Change between the type of obstacle 
+            //Change between the type of obstacle 
             else if (inputPkg.lt > 0)
             {
                 obstacleManager.changeObstaclePlus();
             }
             //Change between the type of obstacle
             //Weird behaviour with the LT button that the RT button doesn't have so we need to lock the LT button once its pressed
-            else if (inputPkg.lt < 0 )// !isLeftTriggerPressed)
+            else if (inputPkg.lt < 0)// !isLeftTriggerPressed)
             {
                 obstacleManager.changeObstacleMoins();
                 isLeftTriggerPressed = true;
@@ -141,15 +165,16 @@ public class Player : MonoBehaviour {
             {
                 isLeftTriggerPressed = false;
             }
-            
+
         }
         inPhase1 = true;
 
     }
 
-   
 
-     void UpdatePhase2(InputManager.InputPkg inputPkg) {
+
+    void UpdatePhase2(InputManager.InputPkg inputPkg)
+    {
         //In phase 2
         inPhase1 = false;
 
@@ -166,12 +191,12 @@ public class Player : MonoBehaviour {
     }
 
 
-     void RotatePlayer(Vector2 dir)
+    void RotatePlayer(Vector2 dir)
     {
 
         //Rotate player with left Joystick input informaton and multiply by a rotation speed and deltaTime
-            transform.Rotate(new Vector3(0, 0, dir.x * rotationSpeed * Time.deltaTime));
-        
+        transform.Rotate(new Vector3(0, 0, dir.x * rotationSpeed * Time.deltaTime));
+
     }
     void Shoot(bool shoot)
     {
@@ -179,11 +204,10 @@ public class Player : MonoBehaviour {
         //Can shoot if the input is true
         if (shoot && bulletsRemaining > MIN_BULLETS)
         {
-            BulletManager.Instance.CreateBullet(gun.transform.position+gun.transform.right ,new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.z),playerId);
+            BulletManager.Instance.CreateBullet(gun.transform.position + gun.transform.right, new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.z), playerId);
             bulletsRemaining--;
-            Debug.LogError("in shoot");
         }
-        
+
     }
     void Reload(bool reload)
     {
@@ -198,8 +222,12 @@ public class Player : MonoBehaviour {
 
     public void PlayerDies()
     {
-
+        isAlive = false;
+        gameObject.SetActive(false);
+        PlayerManager.Instance.playersAlive--;
+        PlayerManager.Instance.IsLastManStanding();
+        
     }
 
- 
+
 }

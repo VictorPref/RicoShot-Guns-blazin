@@ -9,9 +9,8 @@ public class MainMenuFlow : Flow  {
     public override void InitializeFlow()
     {
         base.InitializeFlow();
-       menuManager = MainMenuManager.Instance;
-        menuManager.initialization();
-       
+        menuManager = MainMenuManager.Instance;
+        menuManager.initialization();      
     }
 
     public override void Update(float dt)
