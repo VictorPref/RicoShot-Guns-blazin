@@ -20,7 +20,7 @@ public class PlayVideo : MonoBehaviour {
         if (videoPlayer)
         {
             videoPlayer.Prepare();
-            WaitForSeconds waitForSeconds = new WaitForSeconds(0.25f);
+            WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
             while (!videoPlayer.isPrepared)
             {
                 yield return waitForSeconds;

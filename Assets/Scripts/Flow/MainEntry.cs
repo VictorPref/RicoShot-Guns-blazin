@@ -8,9 +8,20 @@ public class MainEntry : MonoBehaviour {
     FlowManager flowManager;
 
 
+    delegate void TestDelegate(string s);
+    static void M(string s)
+    {
+        Debug.Log(s);
+    }
+
     private void Awake()
     {
         flowManager = new FlowManager();
+
+        TestDelegate testDelC = (x) => { Debug.Log(x);Debug.Log(19); };
+
+        testDelC("Yolo");
+    
     }
 
     // Use this for initialization
