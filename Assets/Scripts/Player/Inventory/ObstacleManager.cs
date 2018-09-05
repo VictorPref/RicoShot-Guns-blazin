@@ -26,6 +26,9 @@ public class ObstacleManager {
 
         //Get the script on the prefab
         obstacle = gameObject.GetComponent<Obstacle>();
+
+        //add color corresponding to playerId  
+        material.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
     }
     public void Update(Vector3 pos,float rotation)
     {
@@ -81,9 +84,6 @@ public class ObstacleManager {
         {
             //Add the obstacle to the list
             gameObject.layer = nbBaseLayer + id_player;
-
-            //add color corresponding to playerId  
-            material.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
 
             obstacles.Add(obstacle);
             obstacle.isFixed = true;
