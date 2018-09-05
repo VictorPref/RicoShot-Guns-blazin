@@ -7,6 +7,7 @@ public class Obstacle : MonoBehaviour
     int lifespan = 3;
     public bool isFixed = false;
     public bool destroy = false;
+    public Material material;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

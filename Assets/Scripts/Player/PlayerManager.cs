@@ -6,9 +6,10 @@ public class PlayerManager
 {
     readonly int INPUTCHECKDELAY = 2;
     private List<Player> players;
-    private List<Vector2> playersPositions = null;
+    private List<Transform> playersPositions = null;
     string[] connectedControllers;
     private static PlayerManager instance = null;
+    public int playersAlive = 0;
 
     #region Singleton
     private PlayerManager()
@@ -34,6 +35,7 @@ public class PlayerManager
         players = new List<Player>();
         CreatePlayers();
         InitializePlayersPositions();
+        playersAlive = players.Count;
     }
 
     public void InitializePlayersPositions()
@@ -42,7 +44,7 @@ public class PlayerManager
         int i = 0;
         foreach (Player p in players)
         {
-            p.transform.position = playersPositions[i];
+            p.transform.position = playersPositions[i].position;
             i++;
         }
     }
@@ -74,7 +76,7 @@ public class PlayerManager
                     GameObject playerObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Player/PlayerTest")); 
                     playerObject.transform.position = new Vector2();
                     Player newPlayer = playerObject.GetComponent<Player>();
-                    newPlayer.setPlayerId(i + 1); //+1 because id should not be 0
+                    newPlayer.Initialize(i + 1); //+1 because id should not be 0
                     players.Add(newPlayer);
                 }
             }
@@ -109,8 +111,19 @@ public class PlayerManager
         
     }
 
-    public bool isLastManStanding() {
-        return players.Count == 1 ? true : false;
+    public void IsLastManStanding() {
+        if (playersAlive <= 1) {
+            Player winner = null;
+            foreach (Player p in players) { if (p.isAlive) winner = p; }
+            MatchManager.Instance.PlayerWinsRound(winner);
+        }
+    }
+
+    public void ActivatePlayers() {
+        foreach (Player p in players) {
+
+            p.ResetPlayer();
+        }
     }
 
     public void DeleteManager()

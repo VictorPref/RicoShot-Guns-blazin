@@ -6,18 +6,20 @@ public class Bullet : MonoBehaviour
     private float initialSpeed = 15, minSpeed = 3;
     private float angle, rayLength = 0.5f, bounciness = 0.75f;
     private int maxRicochets = 5;
+    LayerMask mask;
+    LayerMask playersLayer;
 
     public void initialization()
-    {
-        //gameObject.GetComponent<Renderer>().material.color = Color.white;
+    { 
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * initialSpeed;
-    }
-    public void UpdateBullet()
-    {
         //creating mask so bullet collides with: default map obstacles, its own layer(including the player's obstacles) and the players' layer
-        LayerMask mask = 1 << LayerMask.NameToLayer("NeutralObstacle") | 1 << gameObject.layer | 1 << LayerMask.NameToLayer("Player");
+        playersLayer = LayerMask.NameToLayer("Player");
+        mask = 1 << LayerMask.NameToLayer("NeutralObstacle") | 1 << gameObject.layer | 1 << playersLayer;
+    }
 
+    public void UpdateBullet()
+    {       
         //raycasting to check for collisions with mask
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, rayLength, mask);
 
@@ -34,15 +36,13 @@ public class Bullet : MonoBehaviour
             //rotating the sprite's transform
             transform.Rotate(new Vector3(0, 0, 1), angle);
 
-            //if the bullet hits a player, destroy the player
-            if (hits[i].transform.gameObject.layer == LayerMask.NameToLayer("Player"))
+            //if the bullet hits a player, kill the player
+            if (hits[i].transform.gameObject.layer == playersLayer)
             {
-                Destroy(hits[i].transform.gameObject);
-                PlayerManager.Instance.isLastManStanding();
+                Player p = hits[i].transform.gameObject.GetComponent<Player>();
+                p.PlayerDies();              
             }
         }
-
-
 
         //checking if this is the last rebound allowed for this bullet
         if (isBulletDead())
@@ -53,7 +53,7 @@ public class Bullet : MonoBehaviour
 
     public bool isBulletDead()
     {
-        //has this bullet reached minimum rebounds allowed
+        //has this bullet reached the maximum rebounds allowed or has gone lower than the speed limit
         return maxRicochets == 0 || rb.velocity.magnitude <= minSpeed ? true : false;
     }
 }

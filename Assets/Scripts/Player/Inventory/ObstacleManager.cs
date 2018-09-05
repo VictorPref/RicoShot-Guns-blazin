@@ -17,26 +17,36 @@ public class ObstacleManager {
 
     public void CreateObstacle()
     {
-        //Create the obstacle
-        gameObject = GameObject.Instantiate(InventoryManager.inventory.getObstacle(obstacleNum));
+        if (obstacles != null)
+        {
+            //Create the obstacle
+            gameObject = GameObject.Instantiate(InventoryManager.inventory.getObstacle(obstacleNum));
 
-        //Fetch materials for coloring purposes
-        meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
-        material = meshRenderer.material;
+            //Fetch materials for coloring purposes
+            meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
+            material = meshRenderer.material;
 
-        //Get the script on the prefab
-        obstacle = gameObject.GetComponent<Obstacle>();
+            //Get the script on the prefab
+            obstacle = gameObject.GetComponent<Obstacle>();
+            obstacle.material = material;
 
-        //add color corresponding to playerId  
-        material.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
+            //add color corresponding to playerId  
+           // material.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
+        }
     }
     public void Update(Vector3 pos,float rotation)
     {
-        //Move the obstacle
-        obstacle.UpdateObstacle(pos,rotation);
+
+        if (obstacles != null && obstacle != null)
+        {
+            //Move the obstacle
+            obstacle.UpdateObstacle(pos, rotation);
+        }
+    
+
 
         //Loop to check if one of the obstacle is dead
-        for(int i = obstacles.Count-1;i >= 0;i--)
+        for (int i = obstacles.Count-1;i >= 0;i--)
         {
             if (obstacles[i].destroy == true)
             {
@@ -80,6 +90,7 @@ public class ObstacleManager {
     public void setObstacle()
     {
         //Check if the lists of obstacle is less than the number max of obstacle on the level
+
        if(obstacles.Count < nbObstacleMax)
         {
             //Add the obstacle to the list
@@ -101,7 +112,11 @@ public class ObstacleManager {
     //Select Obstacle from the existing obstacle
     public void SelectFromList()
     {
+     //   selectedObstacle.material.color = new Color(selectedObstacle.material.color.r, selectedObstacle.material.color.g, selectedObstacle.material.color.b, selectedObstacle.material.color.a *2);
         selectedObstacle = obstacles[listElement];
+        float a = selectedObstacle.material.color.a /2;
+
+       // selectedObstacle.material.color = new Color(selectedObstacle.material.color.r, selectedObstacle.material.color.g, selectedObstacle.material.color.b, a);
     }
 
     //Delete the selected obstacle from the list
@@ -133,6 +148,14 @@ public class ObstacleManager {
         {
             listElement = obstacles.Count - 1;
         }
+    }
+
+    public void ResetObstacleList() {
+        foreach (Obstacle obs in obstacles) {
+            //GameObject.Destroy(obs.gameObject);
+            obs.DestroyObstacle();
+        }
+        obstacles.Clear();
     }
 
 }

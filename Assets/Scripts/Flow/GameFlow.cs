@@ -9,6 +9,7 @@ public class GameFlow : Flow {
     PlayerManager playerManager;
     BulletManager bulletManager;
     LevelManager levelManager;
+    MatchManager matchManager;
 
     public override void InitializeFlow()
     {
@@ -16,8 +17,10 @@ public class GameFlow : Flow {
         bulletManager = BulletManager.Instance;
         levelManager = LevelManager.Instance;
         playerManager = PlayerManager.Instance;
+        matchManager = MatchManager.Instance;
         levelManager.GenerateLevel(CURRENTLEVELTESTED);       
         playerManager.Initialize();
+        matchManager.Initialize();
     }
     public override void Update(float dt)
     {
