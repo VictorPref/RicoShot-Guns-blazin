@@ -47,6 +47,7 @@ public class PlayerManager
             p.transform.position = playersPositions[i].position;
             i++;
         }
+
     }
 
     public void Update()
@@ -82,6 +83,13 @@ public class PlayerManager
             }
 
         }
+
+        //Create an instance of the player
+        GameObject playerObject1 = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Player/PlayerTest"));
+        playerObject1.transform.position = new Vector2();
+        Player newPlayer1 = playerObject1.GetComponent<Player>();
+        newPlayer1.Initialize(1 + 1); //+1 because id should not be 0
+        players.Add(newPlayer1);
     }
 
     void RemovePlayer()

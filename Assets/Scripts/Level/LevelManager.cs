@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelManager {
 
     public Level currentLevel;
     private GameObject levelObject;
+    GameObject[] listeLevel;
     public int lvlNumber;
+    int currentlvl = -1;
 
     #region Singleton
     private LevelManager()
@@ -25,8 +28,10 @@ public class LevelManager {
     }
     #endregion
 
-    public void GenerateLevel(int lvlNumber) { 
-        levelObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Levels/Level" + lvlNumber)); //Create level
+    public void GenerateLevel(int lvlNumber) {
+
+        listeLevel = Resources.LoadAll("Prefabs/Levels", typeof(GameObject)).Cast<GameObject>().ToArray(); 
+        levelObject = GameObject.Instantiate<GameObject>(listeLevel[RandomLevel()]); //Create level
         if (!levelObject)
         {
             Debug.LogError("Didn't find any resources at Prefabs/Levels/Level" + lvlNumber);
@@ -43,8 +48,10 @@ public class LevelManager {
 
     public void ResetLevel(int lvlNumber) {
         GameObject.Destroy(levelObject);
-        
-        levelObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Levels/Level" + lvlNumber)); //Create level
+
+        levelObject = GameObject.Instantiate<GameObject>(listeLevel[RandomLevel() ]);
+
+        //   levelObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Levels/Level" + lvlNumber)); //Create level
         currentLevel = levelObject.GetComponent<Level>();
         currentLevel.Initialize();
 
@@ -62,6 +69,19 @@ public class LevelManager {
     public void Update() {
        
     }
+
+    int RandomLevel()
+    {
+        int random = Random.Range(0,listeLevel.Length);
+
+        while(random == currentlvl)
+        {
+            random = Random.Range(0, listeLevel.Length);
+        }
+        currentlvl = random;
+        return random;
+    }
+
 
     public List<Transform> RetrievePlayersSpawnPositions() {
         int playerCount = PlayerManager.Instance.GetPlayers().Count;

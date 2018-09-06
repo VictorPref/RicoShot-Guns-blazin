@@ -62,7 +62,9 @@ public sealed class BulletManager
     {
         foreach (Bullet b in bullets)
         {
-            GameObject.Destroy(b.gameObject);
+            //GameObject.Destroy(b.gameObject);
+            if(b)
+            b.KillBullet();
         }
         bullets = new List<Bullet>();
     }

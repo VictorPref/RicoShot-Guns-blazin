@@ -36,8 +36,9 @@ public class MatchManager {
         match.Initialize();
     }
 
-    void Update() {
+   public void Update() {
         match.UpdateMatchInfo();
+
 	}
 
     public void PlayerWinsRound(Player winner) {

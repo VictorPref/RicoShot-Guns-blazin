@@ -33,8 +33,7 @@ public class MenuFlow : MonoBehaviour {
         }
     }
     public void QuitButton()
-    {
-        Debug.Log("Quit");
+    { 
         Application.Quit();
     }
 }

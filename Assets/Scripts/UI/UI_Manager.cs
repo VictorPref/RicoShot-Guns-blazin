@@ -9,7 +9,9 @@ public class UI_Manager
 
     List<UIPlayer> uiPlayers;
     UIRound uiRound;
-
+    UIWinning uIWinning;
+    GameObject window;
+    bool end = false;
     #region Singleton
     public static UI_Manager Instance
     {
@@ -33,16 +35,32 @@ public class UI_Manager
         uiRound = GameObject.FindGameObjectWithTag("UIRound").GetComponent<UIRound>();
         uiPlayers.Add(GameObject.FindGameObjectWithTag("UIPlayer1").GetComponent<UIPlayer>());
         uiPlayers.Add(GameObject.FindGameObjectWithTag("UIPlayer2").GetComponent<UIPlayer>());
+        window = GameObject.FindGameObjectWithTag("WinningScreen");
+        uIWinning = window.GetComponent<UIWinning>();
+        uIWinning.initialization();
+        window.SetActive(false);
 
     }
 
     public void UpdatePlayer(UIPlayer.UIPlayerPKG pkg)
     {
-        uiPlayers[pkg.id].UpdatePlayerUI(pkg);
+        uiPlayers[pkg.id-1].UpdatePlayerUI(pkg);
     }
     public void UpdateRound(UIRound.UIRoundPKG pkg)
     {
         uiRound.UpdateUIRound(pkg);
+    }
+    public void UpdateWinning(int id)
+    {
+        window.SetActive(true);
+        end = true;
+        uIWinning.UpdateUIWinning(id);
+    }
+    public void UpdateButton()
+    {
+       
+        if(end)
+        uIWinning.UpdateBoutton();
     }
 
 

@@ -5,14 +5,13 @@ using UnityEngine.UI;
 
 public class UIPlayer : MonoBehaviour
 {
-
     public Text inventory;
     public Text bullet;
 
     public void UpdatePlayerUI(UIPlayerPKG pkg)
     {
-        inventory.text = "" + pkg.inventaire;
-        bullet.text = "" + bullet;
+        inventory.text = "" + pkg.inventaire.ToString();
+        bullet.text = "" + pkg.bullet.ToString();
     }
 
     public class UIPlayerPKG

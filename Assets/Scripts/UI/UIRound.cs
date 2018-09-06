@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class UIRound : MonoBehaviour {
+public class UIRound : MonoBehaviour
+{
 
     // Use this for initialization
     public Text p1Round;
@@ -11,9 +12,9 @@ public class UIRound : MonoBehaviour {
 
     public void UpdateUIRound(UIRoundPKG pkg)
     {
-        p1Round.text = "" + pkg.p1Round;
-        p2Round.text = "" + pkg.p2Round;
-        round.text = "" + pkg.round;
+        p1Round.text = "" + pkg.p1Round.ToString();
+        p2Round.text = "" + pkg.p2Round.ToString();
+        round.text = "" + pkg.round.ToString();
     }
 
 

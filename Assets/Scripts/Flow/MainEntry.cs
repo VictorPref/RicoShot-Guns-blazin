@@ -17,10 +17,6 @@ public class MainEntry : MonoBehaviour {
     private void Awake()
     {
         flowManager = new FlowManager();
-
-        TestDelegate testDelC = (x) => { Debug.Log(x);Debug.Log(19); };
-
-        testDelC("Yolo");
     
     }
 

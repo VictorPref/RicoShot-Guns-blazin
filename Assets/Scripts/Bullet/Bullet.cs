@@ -19,35 +19,38 @@ public class Bullet : MonoBehaviour
     }
 
     public void UpdateBullet()
-    {       
+    {
         //raycasting to check for collisions with mask
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, rayLength, mask);
-
-        for (int i = 0; i < hits.Length; i++)
+        if (gameObject )
         {
-            //reduce lifespan
-            maxRicochets--;
-            Vector2 reflected = Vector2.Reflect(transform.right, hits[i].normal);
-            //retrieving angle formed by incoming direction and its reflection
-            angle = Mathf.Atan2(transform.right.x * reflected.y - transform.right.y * reflected.x, transform.right.x * reflected.x + transform.right.y * reflected.y) * 180 / Mathf.PI;
-            //applying new velocity following the reflected direction
-            initialSpeed *= bounciness;
-            rb.velocity = reflected * initialSpeed;
-            //rotating the sprite's transform
-            transform.Rotate(new Vector3(0, 0, 1), angle);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, rayLength, mask);
 
-            //if the bullet hits a player, kill the player
-            if (hits[i].transform.gameObject.layer == playersLayer)
+            for (int i = 0; i < hits.Length; i++)
             {
-                Player p = hits[i].transform.gameObject.GetComponent<Player>();
-                p.PlayerDies();              
-            }
-        }
+                //reduce lifespan
+                maxRicochets--;
+                Vector2 reflected = Vector2.Reflect(transform.right, hits[i].normal);
+                //retrieving angle formed by incoming direction and its reflection
+                angle = Mathf.Atan2(transform.right.x * reflected.y - transform.right.y * reflected.x, transform.right.x * reflected.x + transform.right.y * reflected.y) * 180 / Mathf.PI;
+                //applying new velocity following the reflected direction
+                initialSpeed *= bounciness;
+                rb.velocity = reflected * initialSpeed;
+                //rotating the sprite's transform
+                transform.Rotate(new Vector3(0, 0, 1), angle);
 
-        //checking if this is the last rebound allowed for this bullet
-        if (isBulletDead())
-        {
-            Destroy(gameObject);
+                //if the bullet hits a player, kill the player
+                if (hits[i].transform.gameObject.layer == playersLayer)
+                {
+                    Player p = hits[i].transform.gameObject.GetComponent<Player>();
+                    p.PlayerDies();
+                }
+            }
+
+            //checking if this is the last rebound allowed for this bullet
+            if (isBulletDead())
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -55,5 +58,10 @@ public class Bullet : MonoBehaviour
     {
         //has this bullet reached the maximum rebounds allowed or has gone lower than the speed limit
         return maxRicochets == 0 || rb.velocity.magnitude <= minSpeed ? true : false;
+    }
+
+    public void KillBullet()
+    {
+        Destroy(gameObject);
     }
 }

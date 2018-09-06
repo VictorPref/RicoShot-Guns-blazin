@@ -7,6 +7,11 @@ TagManager:
   - Bullet
   - Player2
   - Player1
+  - UIPlayer1
+  - UIPlayer2
+  - UIRound
+  - WinningScreen
+  - Boutton
   layers:
   - Default
   - TransparentFX

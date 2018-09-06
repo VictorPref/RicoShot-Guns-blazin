@@ -38,6 +38,8 @@ public class Player : MonoBehaviour
         obstacleManager.id_player = playerId;
         SetPlayerColor(playerId);
         gameObject.SetActive(true);
+        UpdateUI();
+
     }
 
     public void ResetPlayer() {
@@ -45,6 +47,7 @@ public class Player : MonoBehaviour
         gameObject.SetActive(true);
         isAlive = true;
         obstacleManager.ResetObstacleList();
+        UpdateUI();
     }
 
     public int GetPlayerId()
@@ -113,7 +116,7 @@ public class Player : MonoBehaviour
             if (inputPkg.A && !isObstacleFixed)
             {
                 obstacleManager.setObstacle();
-
+                UpdateUI();
                 isObstacleFixed = true;
             }
             //if button A is not pressed unlock the possibility of placing an obstacle
@@ -140,6 +143,7 @@ public class Player : MonoBehaviour
                 {
                     bButton = true;
                     obstacleManager.DeleteSelectedObstacle();
+                    UpdateUI();
                 }
                 //Unlock possibility of deleting an obstacle once B is not pressed
                 else if (!inputPkg.B)
@@ -204,15 +208,20 @@ public class Player : MonoBehaviour
         //Can shoot if the input is true
         if (shoot && bulletsRemaining > MIN_BULLETS)
         {
+            
             BulletManager.Instance.CreateBullet(gun.transform.position + gun.transform.right, new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.z), playerId);
             bulletsRemaining--;
+            UpdateUI();
         }
 
     }
     void Reload(bool reload)
     {
         if (reload)
+        {
             bulletsRemaining = MAX_BULLETS;
+            UpdateUI();
+        }
     }
 
     public void PlayerFixedUpdate()
@@ -227,6 +236,14 @@ public class Player : MonoBehaviour
         PlayerManager.Instance.playersAlive--;
         PlayerManager.Instance.IsLastManStanding();
         
+    }
+    void UpdateUI()
+    {
+        UIPlayer.UIPlayerPKG pkg = new UIPlayer.UIPlayerPKG();
+        pkg.bullet = bulletsRemaining;
+        pkg.id = playerId;
+        pkg.inventaire =obstacleManager.nbObstacleMax- obstacleManager.getNbObstacles();
+        UI_Manager.Instance.UpdatePlayer(pkg);
     }
 
 

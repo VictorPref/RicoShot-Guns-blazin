@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleManager {
-    int nbObstacleMax = 3;
+    public int nbObstacleMax = 3;
     int obstacleNum = 0;
     List<Obstacle> obstacles = new List<Obstacle>();
     GameObject gameObject;
@@ -156,6 +156,12 @@ public class ObstacleManager {
             obs.DestroyObstacle();
         }
         obstacles.Clear();
+    }
+
+    //Get the nb of obstacle in the list
+    public int getNbObstacles()
+    {
+        return obstacles.Count;
     }
 
 }
