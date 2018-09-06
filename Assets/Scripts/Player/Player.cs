@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     readonly int MAX_BULLETS = 6;
     readonly int MIN_BULLETS = 0;
+    readonly float UI_UPDATE_DELAY = 0.5f;
 
     InputManager inputManager;
     int playerId;
@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     public int roundsWon = 0;
     public bool isAlive = true;
 
-
     public void Initialize(int playerId)
     {
         this.playerId = playerId;
@@ -40,17 +39,15 @@ public class Player : MonoBehaviour
         obstacleManager.id_player = playerId;
         SetPlayerColor(playerId);
         gameObject.SetActive(true);
-        UpdateUI();
         audio = GetComponent<AudioSource>();
-
     }
 
-    public void ResetPlayer() {
+    public void ResetPlayer()
+    {
         bulletsRemaining = MAX_BULLETS;
         gameObject.SetActive(true);
         isAlive = true;
         obstacleManager.ResetObstacleList();
-        UpdateUI();
     }
 
     public int GetPlayerId()
@@ -79,11 +76,11 @@ public class Player : MonoBehaviour
         }
     }
 
-
     public void UpdatePlayer()
     {
         if (isAlive)
         {
+            UpdateUI2();
             //Get Package of Controller Input
             InputManager.InputPkg inputPkg = inputManager.GetKeysInput(playerId);
 
@@ -99,12 +96,10 @@ public class Player : MonoBehaviour
                 UpdatePhase1(inputPkg);
             }
         }
-
     }
 
     void UpdatePhase1(InputManager.InputPkg inputPkg)
     {
-
         //If in Phase 1 create Object 1 time
         if (inPhase1 == false)
         {
@@ -118,7 +113,6 @@ public class Player : MonoBehaviour
             if (inputPkg.A && !isObstacleFixed)
             {
                 obstacleManager.setObstacle();
-                UpdateUI();
                 isObstacleFixed = true;
             }
             //if button A is not pressed unlock the possibility of placing an obstacle
@@ -130,26 +124,25 @@ public class Player : MonoBehaviour
             // if Y is pressed player can go trought the list of obstacle on the field and delete them
             if (inputPkg.Y)
             {
-                UpdateUI();
                 yButton = true;
-                if (obstacleManager.getNbObstacles() > 0) 
-                obstacleManager.SelectFromList();
+                if (obstacleManager.getNbObstacles() > 0)
+                    obstacleManager.SelectFromList();
                 //Rt button pressed go up in the list of obstacle place on the field
                 if (inputPkg.lt > 0 && !isArrowPress)
                 {
                     isArrowPress = true;
                     obstacleManager.SelectedObstacleForward();
-                 
+
                 }
                 //Lt button pressed go down in the list of obstacle place on the field
                 if (inputPkg.lt < 0 && !isArrowPress)
                 {
                     isArrowPress = true;
                     obstacleManager.SelectedObstacleBack();
-                    
+
                 }
 
-                if(inputPkg.lt == 0)
+                if (inputPkg.lt == 0)
                 {
                     isArrowPress = false;
                 }
@@ -164,7 +157,6 @@ public class Player : MonoBehaviour
                 {
                     bButton = false;
                 }
-
             }
             //Change between the type of obstacle 
             else if (inputPkg.lt > 0 && !isArrowPress)
@@ -178,8 +170,8 @@ public class Player : MonoBehaviour
             {
                 isArrowPress = true;
                 obstacleManager.changeObstacleMoins();
-              
-            }else if(inputPkg.lt == 0)
+            }
+            else if (inputPkg.lt == 0)
             {
                 isArrowPress = false;
             }
@@ -188,64 +180,50 @@ public class Player : MonoBehaviour
                 yButton = false;
                 obstacleManager.alphaUp();
             }
-
         }
         inPhase1 = true;
-
     }
-
-
 
     void UpdatePhase2(InputManager.InputPkg inputPkg)
     {
         //In phase 2
         inPhase1 = false;
 
-
         //Rotate the Player and send Input information about the left Joystick
         RotatePlayer(inputPkg.leftDir);
-
 
         //Player Shoot and send rt input information
         Shoot(inputPkg.A);
 
         //Player can Reload
         Reload(inputPkg.B);
-    }
 
+        obstacleManager.UpdateObstacleCount();
+    }
 
     void RotatePlayer(Vector2 dir)
     {
         //Rotate player with left Joystick input informaton and multiply by a rotation speed and deltaTime
         transform.Rotate(new Vector3(0, 0, dir.x * rotationSpeed * Time.deltaTime));
     }
+
     void Shoot(bool shoot)
     {
-
         //Can shoot if the input is true
         if (shoot && bulletsRemaining > MIN_BULLETS)
         {
             audio.Play();
             BulletManager.Instance.CreateBullet(gun.transform.position + gun.transform.right, new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.z), playerId);
             bulletsRemaining--;
-            UpdateUI();
         }
-
     }
+
     void Reload(bool reload)
     {
         if (reload)
         {
             bulletsRemaining = MAX_BULLETS;
-            UpdateUI();
         }
-    }
-
-
-
-    public void PlayerFixedUpdate()
-    {
-
     }
 
     public void PlayerDies()
@@ -254,15 +232,28 @@ public class Player : MonoBehaviour
         gameObject.SetActive(false);
         PlayerManager.Instance.playersAlive--;
         PlayerManager.Instance.IsLastManStanding();
-        
     }
-    void UpdateUI()
+
+    private void UpdateUI2()
     {
         UIPlayer.UIPlayerPKG pkg = new UIPlayer.UIPlayerPKG();
         pkg.bullet = bulletsRemaining;
         pkg.id = playerId;
-        pkg.inventaire =obstacleManager.nbObstacleMax- obstacleManager.getNbObstacles();
+        pkg.inventaire = obstacleManager.nbObstacleMax - obstacleManager.getNbObstacles();
         UI_Manager.Instance.UpdatePlayer(pkg);
+    }
+
+    private IEnumerator UpdateUI()
+    {
+        while (true)
+        {
+            UIPlayer.UIPlayerPKG pkg = new UIPlayer.UIPlayerPKG();
+            pkg.bullet = bulletsRemaining;
+            pkg.id = playerId;
+            pkg.inventaire = obstacleManager.nbObstacleMax - obstacleManager.getNbObstacles();
+            UI_Manager.Instance.UpdatePlayer(pkg);
+            yield return new WaitForSeconds(UI_UPDATE_DELAY - (playerId / 10));
+        }
     }
 
 

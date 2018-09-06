@@ -7,15 +7,15 @@ using UnityEngine.Video;
 public class MainMenu : MonoBehaviour {
 
     MenuInput input;
-    List<Button> buttons;
-    int selectedButton = 0;
+    List<Button> buttons;  
     Image imgButton;
-    bool changeButton = false;
     GameObject optionPanel;
-    bool inOption = false;
     PlayVideo video;
-
-    public void initialization()
+    int selectedButton = 0;
+    bool changeButton = false;
+    bool inOption = false;
+    
+    public void Initialize()
     {
         input = new MenuInput();
         buttons = new List<Button>();
@@ -37,6 +37,9 @@ public class MainMenu : MonoBehaviour {
         UpdateList(selectedButton);
     }
 
+    /// <summary>
+    /// Updates 
+    /// </summary>
 	public void UpdateMenu () {
         MenuInput.InputPkg inputPkg = input.GetKeysInput();
         if (!inOption)
@@ -58,7 +61,6 @@ public class MainMenu : MonoBehaviour {
         }
         if (inputPkg.A && !inOption)
         {
-            
             buttons[selectedButton].onClick.Invoke();
             inOption = true;
         }
@@ -67,11 +69,12 @@ public class MainMenu : MonoBehaviour {
             buttons[selectedButton].onClick.Invoke();
             inOption = false;
         }
-        Debug.Log(inputPkg.B);
         imgButton.color = Color.gray;
-
     }
 
+    /// <summary>
+    /// Updates selected button in button List. Reverts the previously selected menu button's color to default.
+    /// </summary>
     void UpdateList(int pos)
     {
         imgButton.color = Color.white;
@@ -84,6 +87,5 @@ public class MainMenu : MonoBehaviour {
             selectedButton = buttons.Count - 1;
 
         imgButton = buttons[selectedButton].GetComponent<Image>();
-    }
-    
+    }  
 }

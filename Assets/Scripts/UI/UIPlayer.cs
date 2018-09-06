@@ -12,6 +12,9 @@ public class UIPlayer : MonoBehaviour
     {
         inventory.text = "" + pkg.inventaire.ToString();
         bullet.text = "" + pkg.bullet.ToString();
+        if (pkg.id == 1) {
+            Debug.Log(pkg.inventaire.ToString());
+        }
     }
 
     public class UIPlayerPKG

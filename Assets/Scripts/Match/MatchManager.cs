@@ -26,8 +26,6 @@ public class MatchManager {
     #endregion
 
     public void Initialize() {
-        //levelManager = LevelManager.Instance;
-        //playerManager = PlayerManager.Instance;
         match = new Match();
         CreateMatch();
     }
@@ -38,11 +36,9 @@ public class MatchManager {
 
    public void Update() {
         match.UpdateMatchInfo();
-
 	}
 
     public void PlayerWinsRound(Player winner) {
         match.PlayerWinsRound(winner);
     }
-
 }

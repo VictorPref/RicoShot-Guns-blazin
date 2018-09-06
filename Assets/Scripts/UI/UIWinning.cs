@@ -5,18 +5,17 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIWinning : MonoBehaviour  {
-
     // Use this for initialization
     public Text winner;
     MenuInput menuInput;
     List<Button> buttons;
     List<GameObject> buttonObjects;
     List<Image> buttonColor;
-    int selectionner = 0;
+    int selectedButton = 0;
     bool joystick = false;
     bool aInput = true;
 
-    public void initialization()
+    public void Initialize()
     {
         //Create a list of buttons
         buttons = new List<Button>();
@@ -33,19 +32,17 @@ public class UIWinning : MonoBehaviour  {
             buttons.Add(g.GetComponent<Button>());
             buttonColor.Add(g.GetComponent<Image>());
         }
-       
-
-
     }
 
+    /// <summary>
+    /// Inserts message declaring who's the winner of the match
+    /// </summary>
     public void UpdateUIWinning(int id)
     {
-        //SUPER DUPER TEXT for the winner
         winner.text = "PLAYER " + id.ToString() + " IS THE BEST!!!!!";
-
     }
 
-    public void UpdateBoutton()
+    public void UpdateButton()
     {
         if(menuInput ==null)
             menuInput = new MenuInput();
@@ -61,11 +58,11 @@ public class UIWinning : MonoBehaviour  {
             {
                 if (pkg.leftDir.x > 0)
                 {
-                    BouttonSelect(1);
+                    ButtonSelect(1);
                 }
                 else if (pkg.leftDir.x < 0)
                 {
-                    BouttonSelect(-1);
+                    ButtonSelect(-1);
                 }
 
             }
@@ -76,7 +73,7 @@ public class UIWinning : MonoBehaviour  {
             //Click on the button
             if (pkg.A)
             {
-                buttons[selectionner].onClick.Invoke();
+                buttons[selectedButton].onClick.Invoke();
             }
         }
         else
@@ -86,30 +83,37 @@ public class UIWinning : MonoBehaviour  {
 
     }
 
-    void BouttonSelect(int i)
+    void ButtonSelect(int i)
     {
         joystick = true;
-        buttonColor[selectionner].color = Color.white;
+        buttonColor[selectedButton].color = Color.white;
 
         //Change the selected button
-        selectionner += i;
-        if(selectionner < 0)
+        selectedButton += i;
+        if(selectedButton < 0)
         {
-            selectionner = buttonObjects.Count - 1;
+            selectedButton = buttonObjects.Count - 1;
         }
-        if(selectionner > buttonObjects.Count - 1)
+        if(selectedButton > buttonObjects.Count - 1)
         {
-            selectionner = 0;
+            selectedButton = 0;
         }
         //Change the color of the selected Button
-        buttonColor[selectionner].color = Color.gray;
-       
+        buttonColor[selectedButton].color = Color.gray;      
     }
+
+    /// <summary>
+    /// Reloads the main game's scene
+    /// </summary>
     public void ButtonReset()
     {
         //Reload the Game
         SceneManager.LoadScene("GameScene");
     }
+
+    /// <summary>
+    /// Loads the Main Menu scene
+    /// </summary>
     public void ButtonMenu()
     {
         //Load the Menu

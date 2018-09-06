@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour {
 
+    #region Singleton
     private static InventoryManager instance = null;
 
     public static InventoryManager Instance
@@ -13,18 +14,19 @@ public class InventoryManager : MonoBehaviour {
                 if (instance == null)
                 {
                     instance = new InventoryManager();
-                    initialization();
+                    Initialize();
 
                 }
                 return instance;
         }
     }
+    #endregion
 
     public static Inventory inventory;
 
-    static void initialization()
+    static void Initialize()
     {
         inventory = new Inventory();
-        inventory.initialization();
+        inventory.Initialize();
     }
 }

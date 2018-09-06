@@ -7,26 +7,19 @@ public class MainEntry : MonoBehaviour {
     public FlowType flowTypeInit;
     FlowManager flowManager;
 
-
-    delegate void TestDelegate(string s);
-    static void M(string s)
-    {
-        Debug.Log(s);
-    }
-
     private void Awake()
     {
-        flowManager = new FlowManager();
-    
+        flowManager = new FlowManager();    
     }
 
-    // Use this for initialization
+    /// <summary>
+    /// Initializes a flow
+    /// </summary>
     void Start()
     {
         flowManager.InitializeFlow(flowTypeInit);
     }
 
-    // Update is called once per frame
     void Update()
     {
         flowManager.UpdateFlow(Time.deltaTime);

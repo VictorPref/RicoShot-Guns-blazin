@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    Rigidbody2D rb;
     private float initialSpeed = 15, minSpeed = 3;
     private float angle, rayLength = 0.5f, bounciness = 0.75f;
     private int maxRicochets = 5;
+    Rigidbody2D rb;
     LayerMask mask;
     LayerMask playersLayer;
     TrailRenderer trailRenderer;
     public Vector2 position;
     AudioSource audio;
 
-    public void initialization()
+    public void Initialize()
     { 
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * initialSpeed;
+
         //creating mask so bullet collides with: default map obstacles, its own layer(including the player's obstacles) and the players' layer
         playersLayer = LayerMask.NameToLayer("Player");
         mask = 1 << LayerMask.NameToLayer("NeutralObstacle") | 1 << gameObject.layer | 1 << playersLayer;
@@ -57,14 +58,14 @@ public class Bullet : MonoBehaviour
             }
 
             //checking if this is the last rebound allowed for this bullet
-            if (isBulletDead())
+            if (IsBulletDead())
             {
                 Destroy(gameObject);
             }
         }
     }
 
-    public bool isBulletDead()
+    public bool IsBulletDead()
     {
         //has this bullet reached the maximum rebounds allowed or has gone lower than the speed limit
         return maxRicochets == 0 || rb.velocity.magnitude <= minSpeed ? true : false;

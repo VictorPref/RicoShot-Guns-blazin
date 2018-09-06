@@ -5,20 +5,21 @@ using System.Linq;
 
 public class Inventory  {
 
-    GameObject[] listes;
+    GameObject[] obstaclePrefabList;
 
-    public void initialization()
+    public void Initialize()
     {
-        listes = Resources.LoadAll("Prefabs/Player/Inventory", typeof(GameObject)).Cast<GameObject>().ToArray();
+        obstaclePrefabList = Resources.LoadAll("Prefabs/Player/Inventory", typeof(GameObject)).Cast<GameObject>().ToArray();
     }
 
-    public int getLength()
+    public int GetLength()
     {
-        return listes.Length;
+        return obstaclePrefabList.Length;
     }
-    public GameObject getObstacle(int pos)
+
+    public GameObject GetObstacle(int pos)
     {
-        return listes[pos];
+        return obstaclePrefabList[pos];
     }
 
 }

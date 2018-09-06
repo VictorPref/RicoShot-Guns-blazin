@@ -5,7 +5,6 @@ using UnityEngine;
 public enum FlowType { None, GameFlow, MainMenuFlow }
 public class FlowManager
 {
-
     FlowType currentActiveFlow = FlowType.None;
     Flow currentFlow;
 
@@ -19,10 +18,10 @@ public class FlowManager
             return;
         }
 
-        //flow Already open
+        //flow Already opened
         if (currentActiveFlow == _FlowType)
         {
-            Debug.Log("Already initialize");
+            Debug.Log("Already initialized");
             return;
         }
 
@@ -47,7 +46,7 @@ public class FlowManager
                
                 break;
             default:
-                Debug.LogError("Unhandle switch: " + _FlowType);
+                Debug.LogError("Unhandled switch: " + _FlowType);
                 break;
         }
         currentActiveFlow = _FlowType;

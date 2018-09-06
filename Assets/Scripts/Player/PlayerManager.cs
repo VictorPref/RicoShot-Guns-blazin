@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerManager
 {
     readonly int INPUTCHECKDELAY = 2;
+    private static PlayerManager instance = null;
     private List<Player> players;
     private List<Transform> playersPositions = null;
-    string[] connectedControllers;
-    private static PlayerManager instance = null;
+    string[] connectedControllers;   
     public int playersAlive = 0;
     MeshRenderer meshRenderer;
     Material playerMat;
@@ -50,12 +50,10 @@ public class PlayerManager
             p.transform.rotation = playersPositions[i].rotation;
             i++;
         }
-
     }
 
     public void Update()
     {
-
         if (players != null)
         {
             foreach (Player p in players)
@@ -76,7 +74,7 @@ public class PlayerManager
             {
                 if (!string.IsNullOrEmpty(connectedControllers[i]))
                 {
-                    //Create an instance of the player
+                    //Create an instance of the player only if there's a controller for it
                     GameObject playerObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Player/PlayerTest")); 
                     playerObject.transform.position = new Vector2();
                     Player newPlayer = playerObject.GetComponent<Player>();
@@ -109,16 +107,6 @@ public class PlayerManager
         return players;
     }
 
-    IEnumerator UpdateConnectedControllers()
-    {
-        //check for controllers plugged in/out
-        //update player list accordingly
-        while (true) {
-
-            yield return new WaitForSeconds(INPUTCHECKDELAY);
-        }
-        
-    }
 
     public void IsLastManStanding() {
         if (playersAlive <= 1) {
@@ -130,15 +118,7 @@ public class PlayerManager
 
     public void ActivatePlayers() {
         foreach (Player p in players) {
-
             p.ResetPlayer();
         }
     }
-
-    public void DeleteManager()
-    {
-
-    }
-
-
 }

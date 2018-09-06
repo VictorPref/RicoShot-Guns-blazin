@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class LevelManager {
-
-    public Level currentLevel;
+public class LevelManager
+{
     private GameObject levelObject;
-    GameObject[] listeLevel;
+    public Level currentLevel;
     public int lvlNumber;
+    GameObject[] levelPrefabsList;
     int currentlvl = -1;
 
     #region Singleton
@@ -28,10 +28,13 @@ public class LevelManager {
     }
     #endregion
 
-    public void GenerateLevel(int lvlNumber) {
-
-        listeLevel = Resources.LoadAll("Prefabs/Levels", typeof(GameObject)).Cast<GameObject>().ToArray(); 
-        levelObject = GameObject.Instantiate<GameObject>(listeLevel[RandomLevel()]); //Create level
+    /// <summary>
+    /// Initial level generation, also initializes the level prefabs List
+    /// </summary>
+    public void GenerateLevel(int lvlNumber)
+    {
+        levelPrefabsList = Resources.LoadAll("Prefabs/Levels", typeof(GameObject)).Cast<GameObject>().ToArray();
+        levelObject = GameObject.Instantiate<GameObject>(levelPrefabsList[RandomLevel()]); //Create random level
         if (!levelObject)
         {
             Debug.LogError("Didn't find any resources at Prefabs/Levels/Level" + lvlNumber);
@@ -42,23 +45,23 @@ public class LevelManager {
 
         currentLevel = levelObject.GetComponent<Level>();
         currentLevel.Initialize();
-
-
     }
 
-    public void ResetLevel(int lvlNumber) {
+    /// <summary>
+    /// Given the number of a level (filename format: "LevelX" where X is the level number), destroys previous level gameObject and instantiates LevelX
+    /// </summary>
+    public void ResetLevel(int lvlNumber)
+    {
         GameObject.Destroy(levelObject);
 
-        levelObject = GameObject.Instantiate<GameObject>(listeLevel[RandomLevel() ]);
-
-        //   levelObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Levels/Level" + lvlNumber)); //Create level
+        levelObject = GameObject.Instantiate<GameObject>(levelPrefabsList[RandomLevel()]);
         currentLevel = levelObject.GetComponent<Level>();
         currentLevel.Initialize();
 
         PlayerManager.Instance.ActivatePlayers();
         if (!levelObject)
         {
-            Debug.LogError("Didn't find any resources at Prefabs/Levels/Level" + lvlNumber);
+            Debug.LogError("Couldn't find any resources at Prefabs/Levels/Level" + lvlNumber);
             return;
         }
         levelObject.transform.position = new Vector2();
@@ -66,33 +69,28 @@ public class LevelManager {
         currentLevel = levelObject.GetComponent<Level>();
     }
 
-    public void Update() {
-       
-    }
-
+    /// <summary>
+    /// Returns a random number chosen across the range of available level prefabs
+    /// </summary>
     int RandomLevel()
     {
-        int random = Random.Range(0,listeLevel.Length);
+        int random = Random.Range(0, levelPrefabsList.Length);
 
-        while(random == currentlvl)
+        while (random == currentlvl)
         {
-            random = Random.Range(0, listeLevel.Length);
+            random = Random.Range(0, levelPrefabsList.Length);
         }
         currentlvl = random;
         return random;
     }
 
-
-    public List<Transform> RetrievePlayersSpawnPositions() {
+    /// <summary>
+    /// Returns a list of each player's spawn position according to the level prefab
+    /// </summary>
+    public List<Transform> RetrievePlayersSpawnPositions()
+    {
         int playerCount = PlayerManager.Instance.GetPlayers().Count;
-        int i = 1;
         List<Transform> resultList = currentLevel.playerPositions;
-
-        //while (i <= playerCount) {
-            // resultList.Add(GameObject.FindGameObjectWithTag("Player" + i).transform.position);
-        //    resultList.Add(currentLeve);
-        //    i++;
-       // }
 
         return resultList;
     }

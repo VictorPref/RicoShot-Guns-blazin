@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class MainMenuManager  {
 
-    private static MainMenuManager instance = null;
-
     GameObject mainMenu;
     MainMenu menu;
-   
+    #region Singleton
+    private static MainMenuManager instance = null;
     public static MainMenuManager Instance
     {
         get
@@ -21,11 +20,13 @@ public class MainMenuManager  {
             return instance;
         }
     }
-    public void initialization()
+    #endregion
+
+    public void Initialize()
     {
         mainMenu = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/MainMenu/MainMenu"));
         menu = mainMenu.GetComponent<MainMenu>();
-        menu.initialization();
+        menu.Initialize();
     }
 
     public void Update(float dt)

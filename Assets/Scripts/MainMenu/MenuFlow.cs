@@ -7,12 +7,17 @@ public class MenuFlow : MonoBehaviour {
 
     GameObject option;
 
+    /// <summary>
+    /// Loads the game's main scene
+    /// </summary>
 	public void StartButton()
     {
-        Debug.Log("Start");
         SceneManager.LoadScene("GameScene");
     }
   
+    /// <summary>
+    /// Instantiates the "options" canvas which gives an overview the controller mapping
+    /// </summary>
     public void OptionButton()
     {
         if (option)
@@ -32,6 +37,10 @@ public class MenuFlow : MonoBehaviour {
             option.transform.position = new Vector3(0, 0, 0);
         }
     }
+
+    /// <summary>
+    /// Closes the application
+    /// </summary>
     public void QuitButton()
     { 
         Application.Quit();

@@ -10,18 +10,9 @@ public class Level : MonoBehaviour {
     public List<Transform> playerPositions;
 
     public void Initialize() {
-        // levelPrefab = targetPreset;
-        //obstacleList = new Dictionary<int, GameObject>();
         playerPositions = new List<Transform>();
         playerPositions.Add(p1.transform);
         playerPositions.Add(p2.transform);
-
     }
-
-    public void UpdateLevel()
-    {
-     
-    }
-
 
 }

@@ -23,6 +23,9 @@ public sealed class BulletManager
     }
     #endregion
 
+    /// <summary>
+    /// Calling an update on every bullet instance
+    /// </summary>
     public void Update()
     {
         if (bullets != null)
@@ -37,6 +40,12 @@ public sealed class BulletManager
         }
     }
 
+    /// <summary>
+    /// Bullet creation/initialization
+    /// </summary>
+    /// <param name="spawnLocation">the player's gun location</param>
+    /// <param name="rotation">the player's gun rotation</param>
+    /// <param name="id">the player's id</param>
     public void CreateBullet(Vector2 spawnLocation, Vector2 rotation, int id)
     {
         //Create Bullet object
@@ -47,17 +56,17 @@ public sealed class BulletManager
             Debug.LogError("Couldn't find enemy resources at Prefabs/Bullet/Bullet");
             return;
         }
-        //Bullet takes the player's gun's transform and rotation for its position
-        //bulletObject.transform.position = spawnLocation;
-        //bulletObject.transform.Rotate(new Vector3(0, 0, rotation.y));
-        //bullet is assigned player's object's (obstacles and bullets) layer
+        //Bullet is assigned player's object's (obstacles and bullets) layer
         bulletObject.layer = nbBaseLayers + id;
         Bullet b = bulletObject.GetComponent<Bullet>();
-        b.initialization();
+        b.Initialize();
         b.ActivateTrailRenderer(id);
         bullets.Add(b);
     }
 
+    /// <summary>
+    /// Clears bullet List
+    /// </summary>
     public void DeleteAllBullets()
     {
         foreach (Bullet b in bullets)

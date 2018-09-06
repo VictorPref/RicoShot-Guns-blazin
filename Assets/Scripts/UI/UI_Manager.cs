@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class UI_Manager
 {
-
-    private static UI_Manager instance = null;
-
     List<UIPlayer> uiPlayers;
     UIRound uiRound;
     UIWinning uIWinning;
     GameObject window;
     bool end = false;
+
     #region Singleton
+    private static UI_Manager instance = null;
     public static UI_Manager Instance
     {
         get
@@ -31,15 +30,13 @@ public class UI_Manager
         uiPlayers = new List<UIPlayer>();
         GameObject mainUI = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/UI_Game/UI_InGame"));
 
-
         uiRound = GameObject.FindGameObjectWithTag("UIRound").GetComponent<UIRound>();
         uiPlayers.Add(GameObject.FindGameObjectWithTag("UIPlayer1").GetComponent<UIPlayer>());
         uiPlayers.Add(GameObject.FindGameObjectWithTag("UIPlayer2").GetComponent<UIPlayer>());
         window = GameObject.FindGameObjectWithTag("WinningScreen");
         uIWinning = window.GetComponent<UIWinning>();
-        uIWinning.initialization();
+        uIWinning.Initialize();
         window.SetActive(false);
-
     }
 
     public void UpdatePlayer(UIPlayer.UIPlayerPKG pkg)
@@ -58,11 +55,8 @@ public class UI_Manager
     }
     public void UpdateButton()
     {
-       
-        if(end)
-        uIWinning.UpdateBoutton();
+        if (end)
+            uIWinning.UpdateButton();
     }
-
-
 }
 

@@ -21,7 +21,6 @@ public class GameFlow : Flow {
         matchManager = MatchManager.Instance;
         uI_Manager = UI_Manager.Instance;
 
-
         levelManager.GenerateLevel(CURRENTLEVELTESTED);
         uI_Manager.initialization();
         playerManager.Initialize();
@@ -35,7 +34,6 @@ public class GameFlow : Flow {
         playerManager.Update(); 
         bulletManager.Update();
         matchManager.Update();
-        levelManager.Update();
     }
 
     public override void FixedUpdate(float dt)

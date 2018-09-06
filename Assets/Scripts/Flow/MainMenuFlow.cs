@@ -10,7 +10,7 @@ public class MainMenuFlow : Flow  {
     {
         base.InitializeFlow();
         menuManager = MainMenuManager.Instance;
-        menuManager.initialization();      
+        menuManager.Initialize();      
     }
 
     public override void Update(float dt)
