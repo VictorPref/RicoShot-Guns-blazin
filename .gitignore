@@ -38,3 +38,5 @@ Assets/Scene/GameScene.unity
 Assets/Scene/GameScene.unity
 Assets/Scene/GameScene.unity
 Assets/Scene/GameScene.unity
+Assets/Scene/MainMenu.unity
+Assets/Scripts/Level/Level.cs
