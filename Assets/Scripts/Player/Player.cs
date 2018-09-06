@@ -215,10 +215,8 @@ public class Player : MonoBehaviour
 
     void RotatePlayer(Vector2 dir)
     {
-
         //Rotate player with left Joystick input informaton and multiply by a rotation speed and deltaTime
         transform.Rotate(new Vector3(0, 0, dir.x * rotationSpeed * Time.deltaTime));
-
     }
     void Shoot(bool shoot)
     {
@@ -226,7 +224,6 @@ public class Player : MonoBehaviour
         //Can shoot if the input is true
         if (shoot && bulletsRemaining > MIN_BULLETS)
         {
-            
             BulletManager.Instance.CreateBullet(gun.transform.position + gun.transform.right, new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.z), playerId);
             bulletsRemaining--;
             UpdateUI();
@@ -241,6 +238,8 @@ public class Player : MonoBehaviour
             UpdateUI();
         }
     }
+
+
 
     public void PlayerFixedUpdate()
     {

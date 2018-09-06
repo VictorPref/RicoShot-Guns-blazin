@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleManager {
+public class ObstacleManager
+{
     public int nbObstacleMax = 3;
     int obstacleNum = 0;
     List<Obstacle> obstacles = new List<Obstacle>();
     GameObject gameObject;
-    MeshRenderer meshRenderer;
-    Material material;
+    MeshRenderer[] meshRenderers;
+    List<Material> materials;
     Obstacle obstacle;
     Obstacle selectedObstacle;
     int nbBaseLayer = 7;
@@ -16,7 +17,7 @@ public class ObstacleManager {
     public int id_player;
 
     float halfAlpha = 0.5f;
-    float fullAlpha =  1f;
+    float fullAlpha = 1f;
 
     public void CreateObstacle()
     {
@@ -24,21 +25,27 @@ public class ObstacleManager {
         {
             //Create the obstacle
             gameObject = GameObject.Instantiate(InventoryManager.inventory.getObstacle(obstacleNum));
+            materials = new List<Material>();
 
-            //Fetch materials for coloring purposes
-            meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
-            material = meshRenderer.material;
+
 
             //Get the script on the prefab
             obstacle = gameObject.GetComponent<Obstacle>();
-            obstacle.material = material;
+            obstacle.SetMaterial();
+            materials = obstacle.materials;
+            //obstacle.material = materials;
 
             //add color corresponding to playerId  
-            if (PlayerManager.Instance.GetPlayers()[id_player - 1] != null)
-              material.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
+
+        if (PlayerManager.Instance.GetPlayers()[id_player - 1] != null){
+            foreach (Material mat in materials)
+            {
+                mat.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
+            }
+            }
         }
     }
-    public void Update(Vector3 pos,float rotation)
+    public void Update(Vector3 pos, float rotation)
     {
 
         if (obstacles != null && obstacle != null)
@@ -46,20 +53,20 @@ public class ObstacleManager {
             //Move the obstacle
             obstacle.UpdateObstacle(pos, rotation);
         }
-    
+
 
 
         //Loop to check if one of the obstacle is dead
-        for (int i = obstacles.Count-1;i >= 0;i--)
+        for (int i = obstacles.Count - 1; i >= 0; i--)
         {
             if (obstacles[i].destroy == true)
             {
                 Obstacle temp = obstacles[i];
-                obstacles.Remove(temp);  
+                obstacles.Remove(temp);
             }
         }
     }
-    
+
 
     //Change the obstacle the player is gonna put on the field. Change up
     public void changeObstaclePlus()
@@ -67,7 +74,7 @@ public class ObstacleManager {
         obstacleNum++;
 
         //check if the number for the obstacle selected is bigger than the max array of obstacle 
-        if(obstacleNum >= InventoryManager.inventory.getLength())
+        if (obstacleNum >= InventoryManager.inventory.getLength())
         {
             //set the number for the obstacle selected to 0
             obstacleNum = 0;
@@ -84,7 +91,7 @@ public class ObstacleManager {
         if (obstacleNum <= -1)
         {
             //set the number for the obstacle selected to the array size
-            obstacleNum = InventoryManager.inventory.getLength()-1;
+            obstacleNum = InventoryManager.inventory.getLength() - 1;
         }
         GameObject.Destroy(gameObject);
         CreateObstacle();
@@ -95,7 +102,7 @@ public class ObstacleManager {
     {
         //Check if the lists of obstacle is less than the number max of obstacle on the level
 
-       if(obstacles.Count < nbObstacleMax)
+        if (obstacles.Count < nbObstacleMax)
         {
             //Add the obstacle to the list
             gameObject.layer = nbBaseLayer + id_player;
@@ -123,15 +130,22 @@ public class ObstacleManager {
     public void alphaDown()
     {
         float a = halfAlpha;
-
-        selectedObstacle.material.color = new Color(selectedObstacle.material.color.r, selectedObstacle.material.color.g, selectedObstacle.material.color.b, a);
+        foreach(Material m in selectedObstacle.materials)
+        {
+            m.color = new Color(m.color.r, m.color.g, m.color.b, a);
+        }
+       
     }
 
     public void alphaUp()
     {
-       float a = fullAlpha;
-      
-       selectedObstacle.material.color = new Color(selectedObstacle.material.color.r, selectedObstacle.material.color.g, selectedObstacle.material.color.b, a);
+        float a = fullAlpha;
+
+        foreach (Material m in selectedObstacle.materials)
+        {
+            m.color = new Color(m.color.r, m.color.g, m.color.b, a);
+        }
+
     }
 
     //Delete the selected obstacle from the list
@@ -139,7 +153,7 @@ public class ObstacleManager {
     {
         if (obstacles.Count > 0)
         {
-           
+
             SelectFromList();
             obstacles.Remove(selectedObstacle);
             selectedObstacle.DestroyObstacle();
@@ -152,7 +166,7 @@ public class ObstacleManager {
     {
         alphaUp();
         listElement++;
-        if(listElement > obstacles.Count - 1)
+        if (listElement > obstacles.Count - 1)
         {
             listElement = 0;
         }
@@ -175,8 +189,10 @@ public class ObstacleManager {
         alphaDown();
     }
 
-    public void ResetObstacleList() {
-        foreach (Obstacle obs in obstacles) {
+    public void ResetObstacleList()
+    {
+        foreach (Obstacle obs in obstacles)
+        {
             //GameObject.Destroy(obs.gameObject);
             obs.DestroyObstacle();
         }

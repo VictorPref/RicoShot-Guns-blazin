@@ -10,6 +10,8 @@ public class PlayerManager
     string[] connectedControllers;
     private static PlayerManager instance = null;
     public int playersAlive = 0;
+    MeshRenderer meshRenderer;
+    Material playerMat;
 
     #region Singleton
     private PlayerManager()
@@ -45,6 +47,7 @@ public class PlayerManager
         foreach (Player p in players)
         {
             p.transform.position = playersPositions[i].position;
+            p.transform.rotation = playersPositions[i].rotation;
             i++;
         }
 
@@ -78,6 +81,10 @@ public class PlayerManager
                     playerObject.transform.position = new Vector2();
                     Player newPlayer = playerObject.GetComponent<Player>();
                     newPlayer.Initialize(i + 1); //+1 because id should not be 0
+                    meshRenderer = playerObject.GetComponent<MeshRenderer>();
+                    playerMat = meshRenderer.material;
+                    newPlayer.SetPlayerColor(i + 1);
+                    playerMat.color = newPlayer.playerColor;
                     players.Add(newPlayer);
                 }
             }

@@ -7,7 +7,9 @@ public class Obstacle : MonoBehaviour
     int lifespan = 3;
     public bool isFixed = false;
     public bool destroy = false;
-    public Material material;
+    //public Material material;
+    public List<Material> materials;
+    MeshRenderer[] meshRenderers;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -17,6 +19,15 @@ public class Obstacle : MonoBehaviour
         {
             destroy = true;
             DestroyObstacle();
+        }
+    }
+
+    public void SetMaterial()
+    {
+        meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+        foreach(MeshRenderer mr in meshRenderers)
+            {
+            materials.Add(mr.material);
         }
     }
 
