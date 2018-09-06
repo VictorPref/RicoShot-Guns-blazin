@@ -15,6 +15,9 @@ public class ObstacleManager {
     public int listElement = 0;
     public int id_player;
 
+    float halfAlpha = 0.5f;
+    float fullAlpha =  1f;
+
     public void CreateObstacle()
     {
         if (obstacles != null)
@@ -31,7 +34,8 @@ public class ObstacleManager {
             obstacle.material = material;
 
             //add color corresponding to playerId  
-           // material.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
+            if (PlayerManager.Instance.GetPlayers()[id_player - 1] != null)
+              material.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
         }
     }
     public void Update(Vector3 pos,float rotation)
@@ -112,11 +116,22 @@ public class ObstacleManager {
     //Select Obstacle from the existing obstacle
     public void SelectFromList()
     {
-     //   selectedObstacle.material.color = new Color(selectedObstacle.material.color.r, selectedObstacle.material.color.g, selectedObstacle.material.color.b, selectedObstacle.material.color.a *2);
         selectedObstacle = obstacles[listElement];
-        float a = selectedObstacle.material.color.a /2;
+        alphaDown();
+    }
 
-       // selectedObstacle.material.color = new Color(selectedObstacle.material.color.r, selectedObstacle.material.color.g, selectedObstacle.material.color.b, a);
+    public void alphaDown()
+    {
+        float a = halfAlpha;
+
+        selectedObstacle.material.color = new Color(selectedObstacle.material.color.r, selectedObstacle.material.color.g, selectedObstacle.material.color.b, a);
+    }
+
+    public void alphaUp()
+    {
+       float a = fullAlpha;
+      
+       selectedObstacle.material.color = new Color(selectedObstacle.material.color.r, selectedObstacle.material.color.g, selectedObstacle.material.color.b, a);
     }
 
     //Delete the selected obstacle from the list
@@ -124,6 +139,7 @@ public class ObstacleManager {
     {
         if (obstacles.Count > 0)
         {
+           
             SelectFromList();
             obstacles.Remove(selectedObstacle);
             selectedObstacle.DestroyObstacle();
@@ -134,20 +150,29 @@ public class ObstacleManager {
     //Change the selected obstacle plus one in the list
     public void SelectedObstacleForward()
     {
+        alphaUp();
         listElement++;
         if(listElement > obstacles.Count - 1)
         {
             listElement = 0;
         }
+        SelectFromList();
+        alphaDown();
+
+
+
     }
     //Change the selected obstacle minus one in the list
     public void SelectedObstacleBack()
     {
+        alphaUp();
         listElement--;
         if (listElement < 0)
         {
             listElement = obstacles.Count - 1;
         }
+        SelectFromList();
+        alphaDown();
     }
 
     public void ResetObstacleList() {

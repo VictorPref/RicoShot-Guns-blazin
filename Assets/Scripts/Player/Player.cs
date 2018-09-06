@@ -21,8 +21,9 @@ public class Player : MonoBehaviour
     public Color playerColor;
 
     ObstacleManager obstacleManager;
-    bool isLeftTriggerPressed = false;
+    bool isArrowPress = false;
     bool bButton = false;
+    bool yButton = false;
 
     public int roundsWon = 0;
     public bool isAlive = true;
@@ -128,15 +129,27 @@ public class Player : MonoBehaviour
             // if Y is pressed player can go trought the list of obstacle on the field and delete them
             if (inputPkg.Y)
             {
+                yButton = true;
+                if (obstacleManager.getNbObstacles() > 0) 
+                obstacleManager.SelectFromList();
                 //Rt button pressed go up in the list of obstacle place on the field
-                if (inputPkg.lt > 0)
+                if (inputPkg.lt > 0 && !isArrowPress)
                 {
+                    isArrowPress = true;
                     obstacleManager.SelectedObstacleForward();
+                 
                 }
                 //Lt button pressed go down in the list of obstacle place on the field
-                if (inputPkg.lt < 0)
+                if (inputPkg.lt < 0 && !isArrowPress)
                 {
+                    isArrowPress = true;
                     obstacleManager.SelectedObstacleBack();
+                    
+                }
+
+                if(inputPkg.lt == 0)
+                {
+                    isArrowPress = false;
                 }
                 //B button pressed delete obstacle on the field and lock the possibility once B is pressed
                 if (inputPkg.B && !bButton)
@@ -153,21 +166,26 @@ public class Player : MonoBehaviour
 
             }
             //Change between the type of obstacle 
-            else if (inputPkg.lt > 0)
+            else if (inputPkg.lt > 0 && !isArrowPress)
             {
+                isArrowPress = true;
                 obstacleManager.changeObstaclePlus();
             }
             //Change between the type of obstacle
             //Weird behaviour with the LT button that the RT button doesn't have so we need to lock the LT button once its pressed
-            else if (inputPkg.lt < 0)// !isLeftTriggerPressed)
+            else if (inputPkg.lt < 0 && !isArrowPress)// !isLeftTriggerPressed)
             {
+                isArrowPress = true;
                 obstacleManager.changeObstacleMoins();
-                isLeftTriggerPressed = true;
-            }
-            // unlock the LT button once its not pressed
-            if (inputPkg.lt == 0)
+              
+            }else if(inputPkg.lt == 0)
             {
-                isLeftTriggerPressed = false;
+                isArrowPress = false;
+            }
+            if (!inputPkg.Y && yButton)
+            {
+                yButton = false;
+                obstacleManager.alphaUp();
             }
 
         }
