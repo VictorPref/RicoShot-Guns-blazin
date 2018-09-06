@@ -47,6 +47,10 @@ public class Bullet : MonoBehaviour
                     Player p = hits[i].transform.gameObject.GetComponent<Player>();
                     p.PlayerDies();
                 }
+                //if bullet hits one of the players' obstacles, reduce its lifespan
+                else if (hits[i].transform.gameObject.layer == gameObject.layer) {
+                    hits[i].transform.gameObject.GetComponent<Obstacle>().ReduceLifespan();
+                }
             }
 
             //checking if this is the last rebound allowed for this bullet

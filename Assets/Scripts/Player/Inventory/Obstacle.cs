@@ -11,7 +11,7 @@ public class Obstacle : MonoBehaviour
     public List<Material> materials;
     MeshRenderer[] meshRenderers;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void ReduceLifespan()
     {
         if (isFixed)
             lifespan--;
