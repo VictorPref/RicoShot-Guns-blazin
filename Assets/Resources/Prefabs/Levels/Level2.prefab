@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33812252558983838}
   - component: {fileID: 23800902067172006}
   - component: {fileID: 61069464648168624}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 33154256747294896}
   - component: {fileID: 23195428360546636}
   - component: {fileID: 61411041838510404}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 114775173034143302}
   - component: {fileID: 50537552986626732}
   - component: {fileID: 66381721935863070}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ObsWSmall2 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 114645259071996582}
   - component: {fileID: 50656386291907474}
   - component: {fileID: 66432313704566746}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ObsWSmall2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 33015501280098212}
   - component: {fileID: 23563026823336460}
   - component: {fileID: 61716213758556268}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 33809092554201976}
   - component: {fileID: 23205749729344984}
   - component: {fileID: 61692225554427626}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 33539336088906662}
   - component: {fileID: 23509447999677358}
   - component: {fileID: 61771287656049538}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 114935862509317922}
   - component: {fileID: 50914343613772268}
   - component: {fileID: 66480248693298696}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ObsWSmall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 33384029873655730}
   - component: {fileID: 23265632234275020}
   - component: {fileID: 61567331012339422}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 33460887644068002}
   - component: {fileID: 23269516856106696}
   - component: {fileID: 61635414827303072}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 33750368089741284}
   - component: {fileID: 23448036049916042}
   - component: {fileID: 61119393392394942}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 114481807674388192}
   - component: {fileID: 50266390944247882}
   - component: {fileID: 66754040242381548}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ObsWSmall2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 114940925307705588}
   - component: {fileID: 50714059079692982}
   - component: {fileID: 66575749153989756}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ObsWSmall2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 33179091938049040}
   - component: {fileID: 23962463041650078}
   - component: {fileID: 61425509446132892}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,6 +388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4546343717798282}
   - component: {fileID: 114907280371511614}
+  - component: {fileID: 82957942859117772}
   m_Layer: 0
   m_Name: Level2
   m_TagString: Untagged
@@ -423,7 +424,7 @@ GameObject:
   - component: {fileID: 33386375844118484}
   - component: {fileID: 23448754474299550}
   - component: {fileID: 61760282515167526}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +458,7 @@ GameObject:
   - component: {fileID: 114803310063344988}
   - component: {fileID: 50887911267700850}
   - component: {fileID: 66048310234718198}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ObsWSmall2 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +539,7 @@ GameObject:
   - component: {fileID: 33075810079290024}
   - component: {fileID: 23819519882441066}
   - component: {fileID: 61021075452302566}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +589,7 @@ GameObject:
   - component: {fileID: 33715456433982050}
   - component: {fileID: 23247794909478634}
   - component: {fileID: 61579613398177820}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +657,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967836857361172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.64, y: -2.86, z: 0.003106595}
+  m_LocalPosition: {x: -8.52, y: -2.86, z: 0.003106595}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4609226532125812}
@@ -863,7 +864,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1369399056437424}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.77, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.125, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4287765216528790}
@@ -2407,24 +2408,24 @@ CompositeCollider2D:
         Y: -5159918
   - m_Collider: {fileID: 61760282515167526}
     m_ColliderPaths:
-    - - X: -5509147
+    - - X: -5509150
         Y: -3523266
-      - X: -18905360
+      - X: -18905362
         Y: 5098292
-      - X: -19753056
+      - X: -19753058
         Y: 3461609
-      - X: -6356843
+      - X: -6356846
         Y: -5159949
   m_CompositePaths:
     m_Paths:
-    - - {x: -0.6339504, y: -0.51264733}
+    - - {x: -0.6339506, y: -0.51264703}
       - {x: -0.6322182, y: -0.5159918}
       - {x: 0.7074032, y: 0.3461636}
       - {x: 0.6226371, y: 0.5098256}
-      - {x: -0.633947, y: -0.2988885}
-      - {x: -1.8905361, y: 0.5098292}
-      - {x: -1.9753057, y: 0.34616092}
-      - {x: -0.6356843, y: -0.5159949}
+      - {x: -0.63394713, y: -0.2988886}
+      - {x: -1.8905362, y: 0.5098292}
+      - {x: -1.9753058, y: 0.34616092}
+      - {x: -0.6356846, y: -0.5159949}
   m_VertexDistance: 0.0005
 --- !u!66 &66381721935863070
 CompositeCollider2D:
@@ -2455,24 +2456,24 @@ CompositeCollider2D:
         Y: -5159920
   - m_Collider: {fileID: 61119393392394942}
     m_ColliderPaths:
-    - - X: -5509147
+    - - X: -5509149
         Y: -3523268
-      - X: -18905360
+      - X: -18905364
         Y: 5098285
-      - X: -19753056
+      - X: -19753058
         Y: 3461601
-      - X: -6356842
+      - X: -6356844
         Y: -5159952
   m_CompositePaths:
     m_Paths:
-    - - {x: -0.6339503, y: -0.5126474}
+    - - {x: -0.6339504, y: -0.5126472}
       - {x: -0.632218, y: -0.515992}
       - {x: 0.7074032, y: 0.3461638}
       - {x: 0.6226369, y: 0.5098257}
-      - {x: -0.6339469, y: -0.2988888}
-      - {x: -1.8905361, y: 0.5098285}
-      - {x: -1.9753057, y: 0.3461601}
-      - {x: -0.6356842, y: -0.5159952}
+      - {x: -0.633947, y: -0.2988889}
+      - {x: -1.8905364, y: 0.5098285}
+      - {x: -1.9753058, y: 0.3461601}
+      - {x: -0.63568443, y: -0.5159952}
   m_VertexDistance: 0.0005
 --- !u!66 &66432313704566746
 CompositeCollider2D:
@@ -2494,33 +2495,33 @@ CompositeCollider2D:
   - m_Collider: {fileID: 61716213758556268}
     m_ColliderPaths:
     - - X: 7074027
-        Y: 3461635
-      - X: 6226365
+        Y: 3461634
+      - X: 6226366
         Y: 5098253
       - X: -7169838
-        Y: -3523297
-      - X: -6322176
+        Y: -3523296
+      - X: -6322177
         Y: -5159915
   - m_Collider: {fileID: 61411041838510404}
     m_ColliderPaths:
-    - - X: -5509140
-        Y: -3523265
+    - - X: -5509141
+        Y: -3523264
       - X: -18905344
-        Y: 5098285
+        Y: 5098287
       - X: -19753038
-        Y: 3461603
-      - X: -6356835
-        Y: -5159948
+        Y: 3461604
+      - X: -6356836
+        Y: -5159947
   m_CompositePaths:
     m_Paths:
-    - - {x: -0.6339497, y: -0.51264733}
-      - {x: -0.6322176, y: -0.5159915}
-      - {x: 0.7074027, y: 0.3461635}
-      - {x: 0.6226365, y: 0.5098253}
-      - {x: -0.6339464, y: -0.29888842}
-      - {x: -1.8905344, y: 0.5098285}
-      - {x: -1.9753038, y: 0.3461603}
-      - {x: -0.63568354, y: -0.5159948}
+    - - {x: -0.6339498, y: -0.5126472}
+      - {x: -0.6322177, y: -0.5159915}
+      - {x: 0.7074027, y: 0.3461634}
+      - {x: 0.6226366, y: 0.5098253}
+      - {x: -0.6339465, y: -0.2988883}
+      - {x: -1.8905344, y: 0.5098287}
+      - {x: -1.9753038, y: 0.3461604}
+      - {x: -0.6356836, y: -0.5159947}
   m_VertexDistance: 0.0005
 --- !u!66 &66480248693298696
 CompositeCollider2D:
@@ -2551,24 +2552,24 @@ CompositeCollider2D:
         Y: -5159922
   - m_Collider: {fileID: 61579613398177820}
     m_ColliderPaths:
-    - - X: -5509145
+    - - X: -5509140
         Y: -3523269
-      - X: -18905348
+      - X: -18905344
         Y: 5098292
-      - X: -19753044
+      - X: -19753038
         Y: 3461607
-      - X: -6356840
+      - X: -6356835
         Y: -5159954
   m_CompositePaths:
     m_Paths:
-    - - {x: -0.63395, y: -0.5126474}
+    - - {x: -0.6339497, y: -0.5126479}
       - {x: -0.6322176, y: -0.5159922}
       - {x: 0.7074027, y: 0.3461639}
       - {x: 0.6226365, y: 0.509826}
-      - {x: -0.6339467, y: -0.2988889}
-      - {x: -1.8905349, y: 0.5098292}
-      - {x: -1.9753044, y: 0.3461607}
-      - {x: -0.635684, y: -0.5159954}
+      - {x: -0.6339464, y: -0.2988887}
+      - {x: -1.8905344, y: 0.5098292}
+      - {x: -1.9753038, y: 0.3461607}
+      - {x: -0.63568354, y: -0.5159954}
   m_VertexDistance: 0.0005
 --- !u!66 &66575749153989756
 CompositeCollider2D:
@@ -2590,33 +2591,33 @@ CompositeCollider2D:
   - m_Collider: {fileID: 61771287656049538}
     m_ColliderPaths:
     - - X: 7074027
-        Y: 3461634
-      - X: 6226366
-        Y: 5098253
+        Y: 3461636
+      - X: 6226365
+        Y: 5098254
       - X: -7169838
-        Y: -3523296
-      - X: -6322177
-        Y: -5159915
+        Y: -3523298
+      - X: -6322176
+        Y: -5159917
   - m_Collider: {fileID: 61567331012339422}
     m_ColliderPaths:
-    - - X: -5509141
-        Y: -3523264
-      - X: -18905344
-        Y: 5098287
-      - X: -19753038
-        Y: 3461604
-      - X: -6356836
-        Y: -5159947
+    - - X: -5509146
+        Y: -3523266
+      - X: -18905352
+        Y: 5098282
+      - X: -19753048
+        Y: 3461599
+      - X: -6356841
+        Y: -5159949
   m_CompositePaths:
     m_Paths:
-    - - {x: -0.6339498, y: -0.5126472}
-      - {x: -0.6322177, y: -0.5159915}
-      - {x: 0.7074027, y: 0.3461634}
-      - {x: 0.6226366, y: 0.5098253}
-      - {x: -0.6339465, y: -0.2988883}
-      - {x: -1.8905344, y: 0.5098287}
-      - {x: -1.9753038, y: 0.3461604}
-      - {x: -0.6356836, y: -0.5159947}
+    - - {x: -0.63395, y: -0.5126468}
+      - {x: -0.6322176, y: -0.5159917}
+      - {x: 0.7074027, y: 0.3461636}
+      - {x: 0.6226365, y: 0.5098254}
+      - {x: -0.6339467, y: -0.2988887}
+      - {x: -1.8905352, y: 0.5098282}
+      - {x: -1.9753048, y: 0.3461599}
+      - {x: -0.63568413, y: -0.5159949}
   m_VertexDistance: 0.0005
 --- !u!66 &66754040242381548
 CompositeCollider2D:
@@ -2638,34 +2639,114 @@ CompositeCollider2D:
   - m_Collider: {fileID: 61425509446132892}
     m_ColliderPaths:
     - - X: 7074032
-        Y: 3461638
-      - X: 6226369
-        Y: 5098257
-      - X: -7169842
-        Y: -3523301
-      - X: -6322180
-        Y: -5159920
+        Y: 3461636
+      - X: 6226371
+        Y: 5098256
+      - X: -7169843
+        Y: -3523298
+      - X: -6322182
+        Y: -5159918
   - m_Collider: {fileID: 61635414827303072}
     m_ColliderPaths:
-    - - X: -5509144
-        Y: -3523268
-      - X: -18905358
-        Y: 5098285
-      - X: -19753054
-        Y: 3461601
-      - X: -6356839
-        Y: -5159952
+    - - X: -5509147
+        Y: -3523266
+      - X: -18905360
+        Y: 5098292
+      - X: -19753056
+        Y: 3461609
+      - X: -6356843
+        Y: -5159949
   m_CompositePaths:
     m_Paths:
-    - - {x: -0.6339501, y: -0.5126477}
-      - {x: -0.632218, y: -0.515992}
-      - {x: 0.7074032, y: 0.3461638}
-      - {x: 0.6226369, y: 0.5098257}
-      - {x: -0.63394684, y: -0.2988887}
-      - {x: -1.8905358, y: 0.5098285}
-      - {x: -1.9753054, y: 0.3461601}
-      - {x: -0.6356839, y: -0.5159952}
+    - - {x: -0.6339504, y: -0.51264733}
+      - {x: -0.6322182, y: -0.5159918}
+      - {x: 0.7074032, y: 0.3461636}
+      - {x: 0.6226371, y: 0.5098256}
+      - {x: -0.633947, y: -0.2988885}
+      - {x: -1.8905361, y: 0.5098292}
+      - {x: -1.9753057, y: 0.34616092}
+      - {x: -0.6356843, y: -0.5159949}
   m_VertexDistance: 0.0005
+--- !u!82 &82957942859117772
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696668055347026}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3997049c3371aa24a89358aa5162575c, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114481807674388192
 MonoBehaviour:
   m_ObjectHideFlags: 1

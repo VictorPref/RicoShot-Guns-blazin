@@ -141,9 +141,12 @@ public class ObstacleManager
     {
         float a = fullAlpha;
 
-        foreach (Material m in selectedObstacle.materials)
+        if (obstacles.Count > 0)
         {
-            m.color = new Color(m.color.r, m.color.g, m.color.b, a);
+            foreach (Material m in selectedObstacle.materials)
+            {
+                m.color = new Color(m.color.r, m.color.g, m.color.b, a);
+            }
         }
 
     }

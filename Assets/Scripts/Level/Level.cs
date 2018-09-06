@@ -8,7 +8,6 @@ public class Level : MonoBehaviour {
     private Dictionary<int, GameObject> obstacleList;
     public GameObject p1, p2;
     public List<Transform> playerPositions;
-    public AudioSource levelTheme;
 
     public void Initialize() {
         // levelPrefab = targetPreset;
@@ -16,7 +15,7 @@ public class Level : MonoBehaviour {
         playerPositions = new List<Transform>();
         playerPositions.Add(p1.transform);
         playerPositions.Add(p2.transform);
-        levelTheme.playOnAwake = true;
+
     }
 
     public void UpdateLevel()

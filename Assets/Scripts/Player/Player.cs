@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     float rotationSpeed = -50;
     int bulletsRemaining;
     public GameObject gun;
+    AudioSource audio;
 
     InventoryManager inventory;
     bool inPhase1 = false;
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
         SetPlayerColor(playerId);
         gameObject.SetActive(true);
         UpdateUI();
+        audio = GetComponent<AudioSource>();
 
     }
 
@@ -112,7 +114,6 @@ public class Player : MonoBehaviour
         {
             //Update the obstacleManager with the left joystick and right joystick
             obstacleManager.Update(new Vector3(inputPkg.leftDir.x, inputPkg.leftDir.y, 0) * obstacleMovementSpeed, inputPkg.rightDir.x);
-            Debug.Log("input a" + inputPkg.A);
             //if button A pressed one obstacle is placed and the player can't spam 
             if (inputPkg.A && !isObstacleFixed)
             {
@@ -129,6 +130,7 @@ public class Player : MonoBehaviour
             // if Y is pressed player can go trought the list of obstacle on the field and delete them
             if (inputPkg.Y)
             {
+                UpdateUI();
                 yButton = true;
                 if (obstacleManager.getNbObstacles() > 0) 
                 obstacleManager.SelectFromList();
@@ -156,7 +158,6 @@ public class Player : MonoBehaviour
                 {
                     bButton = true;
                     obstacleManager.DeleteSelectedObstacle();
-                    UpdateUI();
                 }
                 //Unlock possibility of deleting an obstacle once B is not pressed
                 else if (!inputPkg.B)
@@ -224,6 +225,7 @@ public class Player : MonoBehaviour
         //Can shoot if the input is true
         if (shoot && bulletsRemaining > MIN_BULLETS)
         {
+            audio.Play();
             BulletManager.Instance.CreateBullet(gun.transform.position + gun.transform.right, new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.z), playerId);
             bulletsRemaining--;
             UpdateUI();
