@@ -41,6 +41,7 @@ public sealed class BulletManager
     {
         //Create Bullet object
         GameObject bulletObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Bullet/Bullet"));
+       
         if (!bulletObject)
         {
             Debug.LogError("Couldn't find enemy resources at Prefabs/Bullet/Bullet");
@@ -51,10 +52,9 @@ public sealed class BulletManager
         bulletObject.transform.Rotate(new Vector3(0, 0, rotation.y));
         //bullet is assigned player's object's (obstacles and bullets) layer
         bulletObject.layer = nbBaseLayers + id;
-
         Bullet b = bulletObject.GetComponent<Bullet>();
         b.initialization();
-
+        b.ActivateTrailRenderer(id);
         bullets.Add(b);
     }
 

@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     private int maxRicochets = 5;
     LayerMask mask;
     LayerMask playersLayer;
+    TrailRenderer trailRenderer;
+    public Vector2 position;
 
     public void initialization()
     { 
@@ -16,6 +18,7 @@ public class Bullet : MonoBehaviour
         //creating mask so bullet collides with: default map obstacles, its own layer(including the player's obstacles) and the players' layer
         playersLayer = LayerMask.NameToLayer("Player");
         mask = 1 << LayerMask.NameToLayer("NeutralObstacle") | 1 << gameObject.layer | 1 << playersLayer;
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
     public void UpdateBullet()
@@ -63,5 +66,19 @@ public class Bullet : MonoBehaviour
     public void KillBullet()
     {
         Destroy(gameObject);
+    }
+
+    public void ActivateTrailRenderer(int playerId) {  
+        switch (playerId) {
+            case 1:
+                trailRenderer.startColor = Color.blue;
+                break;
+            case 2:
+                trailRenderer.startColor = Color.red;
+                break;
+            default:
+                break;
+        }
+        trailRenderer.enabled = true;
     }
 }

@@ -7,8 +7,8 @@ public class ObstacleManager {
     int obstacleNum = 0;
     List<Obstacle> obstacles = new List<Obstacle>();
     GameObject gameObject;
-    MeshRenderer meshRenderer;
-    Material material;
+    MeshRenderer[] meshRenderers;
+    List<Material> materials;
     Obstacle obstacle;
     Obstacle selectedObstacle;
     int nbBaseLayer = 7;
@@ -21,17 +21,23 @@ public class ObstacleManager {
         {
             //Create the obstacle
             gameObject = GameObject.Instantiate(InventoryManager.inventory.getObstacle(obstacleNum));
-
+            materials = new List<Material>();
             //Fetch materials for coloring purposes
-            meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
-            material = meshRenderer.material;
+            meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer mr in meshRenderers)
+            {
+                materials.Add(mr.material);
+            }
 
             //Get the script on the prefab
             obstacle = gameObject.GetComponent<Obstacle>();
-            obstacle.material = material;
+            //obstacle.material = materials;
 
             //add color corresponding to playerId  
-           // material.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
+            foreach (Material mat in materials)
+            {
+                mat.color = PlayerManager.Instance.GetPlayers()[id_player - 1].playerColor;
+            }
         }
     }
     public void Update(Vector3 pos,float rotation)
@@ -114,8 +120,12 @@ public class ObstacleManager {
     {
      //   selectedObstacle.material.color = new Color(selectedObstacle.material.color.r, selectedObstacle.material.color.g, selectedObstacle.material.color.b, selectedObstacle.material.color.a *2);
         selectedObstacle = obstacles[listElement];
-        float a = selectedObstacle.material.color.a /2;
+        GameObject go = selectedObstacle.gameObject;
 
+        Material s = go.GetComponent<Material>();
+        Color currentcolor = s.GetColor("_Color");
+        currentcolor = new Color(currentcolor.r, currentcolor.g, currentcolor.b, currentcolor.a / 2);
+        s.SetColor("_Color", currentcolor);
        // selectedObstacle.material.color = new Color(selectedObstacle.material.color.r, selectedObstacle.material.color.g, selectedObstacle.material.color.b, a);
     }
 
