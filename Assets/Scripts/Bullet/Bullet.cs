@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     LayerMask playersLayer;
     TrailRenderer trailRenderer;
     public Vector2 position;
+    AudioSource audio;
 
     public void initialization()
     { 
@@ -19,6 +20,7 @@ public class Bullet : MonoBehaviour
         playersLayer = LayerMask.NameToLayer("Player");
         mask = 1 << LayerMask.NameToLayer("NeutralObstacle") | 1 << gameObject.layer | 1 << playersLayer;
         trailRenderer = GetComponent<TrailRenderer>();
+        audio = GetComponent<AudioSource>();
     }
 
     public void UpdateBullet()
@@ -32,6 +34,7 @@ public class Bullet : MonoBehaviour
             {
                 //reduce lifespan
                 maxRicochets--;
+                audio.Play();
                 Vector2 reflected = Vector2.Reflect(transform.right, hits[i].normal);
                 //retrieving angle formed by incoming direction and its reflection
                 angle = Mathf.Atan2(transform.right.x * reflected.y - transform.right.y * reflected.x, transform.right.x * reflected.x + transform.right.y * reflected.y) * 180 / Mathf.PI;
